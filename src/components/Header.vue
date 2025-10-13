@@ -39,7 +39,7 @@
 
                             <ul class="dropdown-menu" aria-labelledby="courseDropdown">
                                 <li v-for="course in courses" :key="course.id">
-                                    <router-link class="dropdown-item" :to="`/courses/${course.slug}`">{{ course.name }}</router-link>
+                                    <router-link class="dropdown-item" :to="`/courses/${course.slug}`">{{ course?.name }}</router-link>
                                 </li>
                             </ul>
 
@@ -99,6 +99,7 @@
 
 <script>
 import CheckoutModal from "../components/CheckoutModal.vue";
+import { courses } from "../data/courses.js";
 
 export default {
   name: "Header",
@@ -109,6 +110,9 @@ export default {
       showCart: false,
       cart: JSON.parse(localStorage.getItem("cart") || "[]")
     };
+  },
+  created() {
+    this.courses = courses; // ✅ gán dữ liệu khi component được tạo
   },
   computed: {
     totalPrice() {

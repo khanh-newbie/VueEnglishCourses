@@ -139,12 +139,6 @@
                                     <li><i class="bi bi-people-fill me-2 text-info"></i><strong>Học viên:</strong> 15</li>
                                 </ul>
                                 <button class="btn btn-success w-100 mb-3">Tham gia khóa học</button>
-                                <div class="text-center">
-                                    <p class="mb-2 fw-bold">Chia sẻ khoá học:</p>
-                                    <a href="#" class="btn btn-outline-primary btn-sm me-1"><i class="bi bi-facebook"></i></a>
-                                    <a href="#" class="btn btn-outline-info btn-sm me-1"><i class="bi bi-twitter-x"></i></a>
-                                    <a href="#" class="btn btn-outline-secondary btn-sm"><i class="bi bi-linkedin"></i></a>
-                                </div>
                             </div>
                         </div>
                     </div>
