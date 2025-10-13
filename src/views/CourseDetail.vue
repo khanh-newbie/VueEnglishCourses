@@ -8,22 +8,21 @@
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb mb-0">
                                 <li class="breadcrumb-item">
-                                    <a href="index.html" class="text-white-50 text-decoration-none">Trang chủ</a>
+                                <router-link to="/" class="text-white-50 text-decoration-none">Trang chủ</router-link>
                                 </li>
                                 <li class="breadcrumb-item">
-                                    <a href="course.html" class="text-white-50 text-decoration-none">Khóa học</a>
+                                <router-link to="/courses" class="text-white-50 text-decoration-none">Khóa học</router-link>
                                 </li>
-                                <li class="breadcrumb-item active text-white" aria-current="page">Toeic Reading</li>
+                                <li class="breadcrumb-item active text-white" aria-current="page">{{ course?.name }}</li>
                             </ol>
                         </nav>
-                </div>
+                    </div>
 
-                <div class="container d-flex flex-column align-items-center justify-content-center text-center pt-4">
-                    <h1 class="fw-bold mb-2 display-5">Toeic Reading</h1>
-                    <p class="mb-1"><i class="bi bi-person-circle me-2"></i>Bởi Cô Diệp</p>
-                    <p class="mb-0"><i class="bi bi-book me-2"></i>Khóa học Toeic</p>
-                </div>
-
+                    <div class="container d-flex flex-column align-items-center justify-content-center text-center pt-4">
+                        <h1 class="fw-bold mb-2 display-5">{{ course?.name }}</h1>
+                        <p class="mb-1"><i class="bi bi-person-circle me-2"></i>{{ course?.teacher }}</p>
+                        <p class="mb-0"><i class="bi bi-book me-2"></i>{{ course?.title }}</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -118,7 +117,7 @@
                                 <img src="https://secure.gravatar.com/avatar/024468074b51259bc54a1458828c56fca665cc3a62ebf983717e2199809060b3?s=150" 
                                     class="rounded-circle me-3" width="80" height="80" alt="Giảng viên">
                                 <div>
-                                    <h5 class="mb-1">Cô Diệp</h5>
+                                    <h5 class="mb-1">{{ course?.teacher }}</h5>
                                     <p class="mb-0 text-muted">Giảng viên Toeic chuyên sâu với hơn 5 năm kinh nghiệm.</p>
                                 </div>
                                 </div>
@@ -134,8 +133,8 @@
                             <div class="card-body">
                                 <h5 class="fw-bold">Khoá học bao gồm:</h5>
                                 <ul class="list-unstyled mb-3">
-                                    <li><i class="bi bi-cash-coin me-2 text-success"></i><strong>Giá:</strong> 1.200.000 ₫</li>
-                                    <li><i class="bi bi-person-fill me-2 text-primary"></i><strong>Giáo viên:</strong> Cô Diệp</li>
+                                    <li><i class="bi bi-cash-coin me-2 text-success"></i><strong>Giá:</strong> {{ course?.price }}</li>
+                                    <li><i class="bi bi-person-fill me-2 text-primary"></i><strong>Giáo viên:</strong> {{ course?.teacher }}</li>
                                     <li><i class="bi bi-journal-text me-2 text-warning"></i><strong>Bài học:</strong> 5</li>
                                     <li><i class="bi bi-people-fill me-2 text-info"></i><strong>Học viên:</strong> 15</li>
                                 </ul>
@@ -156,8 +155,29 @@
 </template>
 
 <script>
+import { courses } from '../data/courses.js'
+
 export default {
-  name: "CourseDetail"
+  name: "CourseDetail",
+  data() {
+    return {
+      course: null
+    }
+  },
+  mounted() {
+    this.loadCourse()
+  },
+  watch: {
+    '$route.params.slug': function() {
+      this.loadCourse()
+    }
+  },
+  methods: {
+    loadCourse() {
+      const slug = this.$route.params.slug
+      this.course = courses.find(c => c.slug === slug)
+    }
+  }
 }
 </script>
 

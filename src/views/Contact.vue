@@ -6,7 +6,7 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb justify-content-center mb-0">
                     <li class="breadcrumb-item">
-                        <a href="#" class="text-decoration-none text-white-50">Trang chủ</a>
+                        <router-link to="/" class="text-decoration-none text-white-50">Trang chủ</router-link>
                     </li>
                     <li class="breadcrumb-item active text-white" aria-current="page">Liên hệ chúng tôi</li>
                 </ol>

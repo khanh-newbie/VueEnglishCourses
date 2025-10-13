@@ -1,5 +1,5 @@
 <template>
-  <Header />          <!-- Cố định -->
+  <Header ref="header" />          <!-- Cố định -->
   <router-view />     <!-- Đây là content riêng của từng màn -->
   <Footer />          <!-- Cố định -->
 </template>
