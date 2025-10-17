@@ -64,51 +64,7 @@
 
                             <!-- Chương trình học -->
                             <div class="tab-pane fade" id="curriculum" role="tabpanel">
-                                <h4 class="fw-bold mb-3">Chương trình học</h4>
-                                <ul class="list-group">
-                                    <!-- Lesson 1 -->
-                                    <div class="card mb-3 shadow-sm">
-                                        <div class="card-body d-flex justify-content-between align-items-center">
-                                            <div class="col-md-10">
-                                                <h5 class="card-title mb-1">Lesson 1</h5>
-                                                <p class="card-text mb-0">
-                                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur, incidunt at? Dolor porro impedit distinctio odit laborum perspiciatis aperiam minima, mollitia amet ab molestias atque esse quibusdam assumenda, nulla sit.
-                                                </p>
-                                            </div>
-                                            <div class="col-md-2 d-flex justify-content-center align-items-center">
-                                                <button class="btn btn-sm btn-primary" onclick="location.href='LectureDetail'">Xem trước</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Lesson 2 -->
-                                    <div class="card mb-3 shadow-sm">
-                                        <div class="card-body d-flex justify-content-between align-items-center">
-                                            <div class="col-md-10">
-                                                <h5 class="card-title mb-1">Lesson 2</h5>
-                                                <p class="card-text mb-0">
-                                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur, incidunt at? Dolor porro impedit distinctio odit laborum perspiciatis aperiam minima, mollitia amet ab molestias atque esse quibusdam assumenda, nulla sit.
-                                                </p>
-                                            </div>
-                                            <div class="col-md-2 d-flex justify-content-center align-items-center">
-                                                <button class="btn btn-sm btn-primary" onclick="location.href='LectureDetail'">Xem trước</button>  
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Lesson 3 -->
-                                    <div class="card mb-3 shadow-sm">
-                                        <div class="card-body d-flex justify-content-between align-items-center">
-                                            <div class="col-md-10">
-                                                <h5 class="card-title mb-1">Lesson 3</h5>
-                                                <p class="card-text mb-0">
-                                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur, incidunt at? Dolor porro impedit distinctio odit laborum perspiciatis aperiam minima, mollitia amet ab molestias atque esse quibusdam assumenda, nulla sit.
-                                                </p>
-                                            </div>
-                                            <div class="col-md-2 d-flex justify-content-center align-items-center">
-                                                <button class="btn btn-sm btn-primary" onclick="location.href='LectureDetail'">Xem trước</button>
-                                            </div>
-                                        </div>
-                                    </div>                        
-                                </ul>
+                                <CourseCurriculum :courseType="slugType" />
                             </div>
 
                             <!-- Giảng viên -->
@@ -150,30 +106,35 @@
 
 <script>
 import { courses } from '../data/courses.js'
+import CourseCurriculum from "../components/CourseCurriculum.vue"
 
 export default {
   name: "CourseDetail",
-  data() {
-    return {
-      course: null
+  components: { CourseCurriculum },
+  props: [ 'slug'],
+  data: () => ({ course: null }),
+  computed: {
+    slugType() {
+      // ✅ Tự động xác định loại khóa học từ slug
+      if (this.slug?.includes('reading')) return 'reading'
+      if (this.slug?.includes('listening')) return 'listening'
+      return ''
     }
   },
   mounted() {
     this.loadCourse()
   },
   watch: {
-    '$route.params.slug': function() {
-      this.loadCourse()
-    }
+    '$route.params.slug': 'loadCourse'
   },
   methods: {
     loadCourse() {
-      const slug = this.$route.params.slug
-      this.course = courses.find(c => c.slug === slug)
+      this.course = courses.find(c => c.slug === this.$route.params.slug)
     }
   }
 }
 </script>
+
 
 <style scoped>
 /* CSS riêng màn Course */

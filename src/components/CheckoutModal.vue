@@ -3,7 +3,7 @@
     <div class="modal-backdrop" v-if="open" @click="close"></div>
 
     <transition name="fade">
-      <div v-if="open" class="checkout-modal card p-3 shadow-lg">
+      <div v-show="open" class="checkout-modal card p-3 shadow-lg">
         <div class="d-flex justify-content-between align-items-center mb-2">
           <h5 class="mb-0">Thanh toán</h5>
           <button class="btn-close" @click="close"></button>
@@ -49,7 +49,6 @@
               <label class="form-label small">Phương thức (giả lập)</label>
               <select v-model="form.method" class="form-select form-select-sm">
                 <option value="card">Thẻ (giả lập)</option>
-                <option value="cod">Thanh toán khi nhận hàng (giả lập)</option>
                 <option value="bank">Chuyển khoản (giả lập)</option>
               </select>
             </div>
@@ -103,8 +102,8 @@ export default {
   },
   methods: {
     close() {
-      if (!this.processing) this.$emit("close")
-    },
+  this.$emit("close")
+  },
     onPay() {
       if (!this.form.name || !this.form.email) {
         this.result = { success: false, message: "Vui lòng điền tên và email." }

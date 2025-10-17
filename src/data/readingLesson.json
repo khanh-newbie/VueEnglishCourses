@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "title": "Lesson 1: Introduction to Reading",
+    "video": "https://www.youtube.com/embed/abc123"
+  },
+  {
+    "id": 2,
+    "title": "Lesson 2: Skimming and Scanning",
+    "video": "https://www.youtube.com/embed/nPLv2A66qac"
+  },
+  {
+    "id": 3,
+    "title": "Lesson 3: Understanding Context",
+    "video": "https://www.youtube.com/embed/YOUR_VIDEO_ID_3"
+  }
+]

@@ -1,0 +1,43 @@
+{
+  "reading": [
+    {
+      "id": 1,
+      "title": "Lesson 1: Tổng quan kỹ năng Reading",
+      "description": "Giới thiệu cấu trúc phần Reading trong đề TOEIC (Part 5, 6, 7), cách tính điểm, thời gian làm bài và chiến lược phân bổ thời gian hiệu quả."
+    },
+    {
+      "id": 2,
+      "title": "Lesson 2: Tenses and Verb Forms",
+      "description": "Ôn lại các thì thường gặp trong TOEIC và cách chia động từ đúng ngữ cảnh."
+    },
+     {
+      "id": 4,
+      "title": "Lesson 4: Adjectives and Adverbs",
+      "description": "Phân biệt tính từ – trạng từ và vị trí của chúng trong câu"
+    },
+     {
+      "id": 5,
+      "title": "Lesson 5: Prepositions and Conjunctions",
+      "description": "Sử dụng giới từ và liên từ giúp câu rõ nghĩa và logic."
+    },
+     {
+      "id": 2,
+      "title": "Lesson 6: Pronouns and Parallel Structure",
+      "description": "Đại từ, đại từ quan hệ, và cấu trúc song song trong câu TOEIC."
+    }
+   
+  ],
+  "listening": [
+    {
+      "id": 1,
+      "title": "Lesson 1: Tổng quan kỹ năng Listening",
+      "description": "Giới thiệu các phần Part 1–4 trong bài thi Listening TOEIC."
+    },
+    {
+      "id": 2,
+      "title": "Lesson 2: Photographs",
+      "description": "Luyện tập mô tả hình ảnh (Part 1)."
+    }
+   
+  ]
+}

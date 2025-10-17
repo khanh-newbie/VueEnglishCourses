@@ -108,7 +108,8 @@ export default {
     return {
       courses: [],  // có thể import từ courses.js nếu muốn
       showCart: false,
-      cart: JSON.parse(localStorage.getItem("cart") || "[]")
+      cart: JSON.parse(localStorage.getItem("cart") || "[]"),
+      checkoutOpen: false
     };
   },
   created() {

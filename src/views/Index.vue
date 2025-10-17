@@ -7,7 +7,7 @@
                 <div class="row align-items-center">
                     <!-- Text -->
                     <div class="col-md-6 text-center text-md-start mb-4 mb-md-0">
-                        <h1 class="fw-bold display-5">Học IELTS<br>cùng chuyên gia</h1>
+                        <h1 class="fw-bold display-5">Học TOEIC<br>cùng chuyên gia</h1>
                         <h3 class="fw-semibold mb-4">Hoàng Bích Diệp</h3>
                         <router-link
                         to="/courses"
