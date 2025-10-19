@@ -14,7 +14,6 @@
         </div>
 
         <div v-else>
-          <!-- list items -->
           <ul class="list-group mb-3">
             <li class="list-group-item d-flex justify-content-between align-items-center" v-for="it in cart" :key="it.id">
               <div>
@@ -30,7 +29,6 @@
             <div class="fw-bold">{{ totalPrice }} ₫</div>
           </div>
 
-          <!-- form -->
           <form @submit.prevent="onPay">
             <div class="mb-2">
               <label class="form-label small">Họ và tên</label>
@@ -44,7 +42,6 @@
               <label class="form-label small">Địa chỉ</label>
               <input v-model="form.address" class="form-control form-control-sm" />
             </div>
-
             <div class="mb-3">
               <label class="form-label small">Phương thức (giả lập)</label>
               <select v-model="form.method" class="form-select form-select-sm">
@@ -55,7 +52,6 @@
 
             <div class="d-flex justify-content-between align-items-center">
               <button class="btn btn-secondary btn-sm" type="button" @click="close">Hủy</button>
-
               <button class="btn btn-primary btn-sm" :disabled="processing">
                 <span v-if="processing" class="spinner-border spinner-border-sm me-2" role="status"></span>
                 {{ processing ? 'Đang xử lý...' : 'Thanh toán' }}
@@ -63,7 +59,6 @@
             </div>
           </form>
 
-          <!-- result -->
           <div v-if="result" class="mt-3">
             <div :class="result.success ? 'alert alert-success' : 'alert alert-danger'">
               {{ result.message }}
@@ -79,59 +74,55 @@
 </template>
 
 <script>
+import { ref, computed, watch } from 'vue'
+
 export default {
-  name: "CheckoutModal",
+  name: 'CheckoutModal',
   props: {
     open: { type: Boolean, default: false },
     cart: { type: Array, default: () => [] }
   },
-  emits: ["close", "paid"], // paid -> emit order back to parent
-  data() {
-    return {
-      form: { name: "", email: "", address: "", method: "card" },
-      processing: false,
-      result: null
-    }
-  },
-  computed: {
-    totalPrice() {
-      // return formatted number (string)
-      const sum = this.cart.reduce((s, it) => s + Number(it.price.replace(/\./g, "").replace(" ₫", "")), 0)
+  emits: ['close', 'paid'],
+  setup(props, { emit }) {
+    const form = ref({ name: '', email: '', address: '', method: 'card' })
+    const processing = ref(false)
+    const result = ref(null)
+
+    const totalPrice = computed(() => {
+      const sum = props.cart.reduce(
+        (s, it) => s + Number(it.price.replace(/\./g, '').replace(' ₫', '')),
+        0
+      )
       return sum.toLocaleString()
-    }
-  },
-  methods: {
-    close() {
-  this.$emit("close")
-  },
-    onPay() {
-      if (!this.form.name || !this.form.email) {
-        this.result = { success: false, message: "Vui lòng điền tên và email." }
+    })
+
+    const close = () => emit('close')
+
+    const onPay = () => {
+      if (!form.value.name || !form.value.email) {
+        result.value = { success: false, message: 'Vui lòng điền tên và email.' }
         return
       }
-      this.processing = true
-      this.result = null
+      processing.value = true
+      result.value = null
 
-      // simulate API/payment processing
       setTimeout(() => {
-        // giả lập success
         const orderId = 'ORD' + Date.now()
         const order = {
           id: orderId,
-          items: this.cart.slice(),
-          total: this.totalPrice,
-          customer: { ...this.form },
-          method: this.form.method,
+          items: props.cart.slice(),
+          total: totalPrice.value,
+          customer: { ...form.value },
+          method: form.value.method,
           createdAt: new Date().toISOString()
         }
-
-        // emit order để parent xử lý (lưu localStorage, clear cart, ...)
-        this.$emit("paid", order)
-
-        this.processing = false
-        this.result = { success: true, message: "Thanh toán giả lập thành công!", orderId }
+        emit('paid', order)
+        processing.value = false
+        result.value = { success: true, message: 'Thanh toán giả lập thành công!', orderId }
       }, 1400)
     }
+
+    return { form, processing, result, totalPrice, close, onPay }
   }
 }
 </script>

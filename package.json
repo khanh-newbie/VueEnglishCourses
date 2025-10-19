@@ -6,17 +6,26 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "tailwind:init": "tailwindcss init -p"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^7.1.0",
     "bootstrap": "^5.3.8",
     "bootstrap-icons": "^1.13.1",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^3.0.3",
+    "naive-ui": "^2.43.1",
+    "pinia": "^3.0.3",
     "vue": "^3.5.22",
     "vue-router": "^4.5.1"
   },
   "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.14",
     "@vitejs/plugin-vue": "^6.0.1",
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.13",
     "vite": "^7.1.7"
   }
 }

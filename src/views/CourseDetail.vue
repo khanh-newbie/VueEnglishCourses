@@ -91,10 +91,9 @@
                                 <ul class="list-unstyled mb-3">
                                     <li><i class="bi bi-cash-coin me-2 text-success"></i><strong>Giá:</strong> {{ course?.price }}</li>
                                     <li><i class="bi bi-person-fill me-2 text-primary"></i><strong>Giáo viên:</strong> {{ course?.teacher }}</li>
-                                    <li><i class="bi bi-journal-text me-2 text-warning"></i><strong>Bài học:</strong> 5</li>
-                                    <li><i class="bi bi-people-fill me-2 text-info"></i><strong>Học viên:</strong> 15</li>
+                                    <li><i class="bi bi-journal-text me-2 text-warning"></i><strong>Bài học:</strong> {{ lessonCount }} </li>
+                                    <li><i class="bi bi-people-fill me-2 text-info"></i><strong>Học viên:</strong> {{ course?.students }}</li>
                                 </ul>
-                                <button class="btn btn-success w-100 mb-3">Tham gia khóa học</button>
                             </div>
                         </div>
                     </div>
@@ -107,6 +106,8 @@
 <script>
 import { courses } from '../data/courses.js'
 import CourseCurriculum from "../components/CourseCurriculum.vue"
+import lessons from '../data/lesson.json';
+import { useCartStore } from '../stores/cartStore.js'
 
 export default {
   name: "CourseDetail",
@@ -119,6 +120,9 @@ export default {
       if (this.slug?.includes('reading')) return 'reading'
       if (this.slug?.includes('listening')) return 'listening'
       return ''
+    },
+    lessonCount() {
+        return this.slugType ? lessons[this.slugType].length : 0;
     }
   },
   mounted() {

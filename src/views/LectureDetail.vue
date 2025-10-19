@@ -16,43 +16,42 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted, watch } from "vue";
+import { useRoute } from "vue-router";
 import LessonList from "../components/LessonList.vue";
 import LessonContent from "../components/LessonContent.vue";
+import readingLessons from "../data/readingLesson.json";
+import listeningLessons from "../data/listeningLesson.json";
 
-const lessons = ref([
-  {
-    id: 1,
-    title: "Lesson 1: Giới thiệu & Chiến lược làm bài",
-    description: "Giới thiệu cấu trúc đề và mẹo làm bài.",
-    video: "https://www.youtube.com/embed/Ot5sziwGlsM?si=s1JnHCmf_WHAyH23",
-    quiz: [
-      {
-        question: "What is the main purpose of the video?",
-        options: [
-          { label: "A", text: "To introduce the IELTS format" },
-          { label: "B", text: "To explain grammar rules" },
-          { label: "C", text: "To discuss vocabulary" }
-        ]
-      },
-      {
-        question: "How many sections are in the IELTS Listening test?",
-        options: [
-          { label: "A", text: "Two" },
-          { label: "B", text: "Three" },
-          { label: "C", text: "Four" }
-        ]
-      }
-    ]
-  },
-  {
-    id: 2,
-    title: "Lesson 2: Từ vựng mô tả hành động trong ảnh",
-    description: "Từ vựng mô tả hành động của người trong ảnh.",
-    video: "https://www.youtube.com/embed/TX7WjvP4F1o",
-    quiz: []
+const route = useRoute();
+const lessons = ref([]);
+const selectedLesson = ref(null);
+
+async function loadLessons() {
+  const slug = route.params.slug;  // reading hoặc listening
+  const lessonId = Number(route.params.id); // id bài học trong URL
+
+  try {
+    //load file JSON tương ứng
+    let data = [];
+    if (slug === "reading") {
+      data = (await import("../data/readingLesson.json")).default;
+    } else if (slug === "listening") {
+      data = (await import("../data/listeningLesson.json")).default;
+    }
+
+    lessons.value = data;
+    selectedLesson.value =
+      lessons.value.find((l) => l.id === lessonId) || lessons.value[0];
+  } catch (err) {
+    console.error("Lỗi khi load dữ liệu bài học:", err);
   }
-]);
+}
 
-const selectedLesson = ref(lessons.value[0]);
+// Load khi component mount
+onMounted(loadLessons);
+
+// Nếu chuyển route (VD: từ reading sang listening), thì reload
+watch(() => route.fullPath, loadLessons);
 </script>
+

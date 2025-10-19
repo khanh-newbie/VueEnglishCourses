@@ -13,7 +13,7 @@
     <!-- Danh sách bài học -->
     <div class="list-group">
       <button
-        v-for="lesson in lessons"
+        v-for="lesson in filteredLessons"
         :key="lesson.id"
         class="list-group-item list-group-item-action"
         @click="$emit('selectLesson', lesson)"
@@ -21,24 +21,24 @@
         {{ lesson.title }}
       </button>
     </div>
-  </div>  
+  </div>
 </template>
 
 <script setup>
 import { ref, computed } from "vue";
-import lessons from "../data/readingLesson.json";
 
 const props = defineProps({
-  lessons: Array
+  lessons: Array,
 });
 const emits = defineEmits(["selectLesson"]);
 
 const search = ref("");
 
 const filteredLessons = computed(() =>
-  props.lessons.filter(l =>
-    l.title.toLowerCase().includes(search.value.toLowerCase()) ||
-    l.description.toLowerCase().includes(search.value.toLowerCase())
+  props.lessons.filter(
+    (l) =>
+      l.title.toLowerCase().includes(search.value.toLowerCase()) ||
+      (l.description && l.description.toLowerCase().includes(search.value.toLowerCase()))
   )
 );
 </script>

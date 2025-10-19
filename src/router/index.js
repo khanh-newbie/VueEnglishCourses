@@ -16,7 +16,12 @@ const routes = [
     props: true 
   },
   { path: '/contact', name: 'Contact', component: Contact},
-  { path: '/lectureDetail', name: 'LectureDetail', component: LectureDetail},
+    {
+    path: '/lecture/:slug/:id',
+    name: 'LectureDetail',
+    component: LectureDetail,
+    props: true
+  },
 ]
 
 const router = createRouter({

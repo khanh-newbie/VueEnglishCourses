@@ -1,0 +1,31 @@
+{
+  "1": [
+    {
+      "question": "What is the main skill in this section?",
+      "options": [
+        { "label": "A", "text": "Speaking" },
+        { "label": "B", "text": "Reading" },
+        { "label": "C", "text": "Listening" }
+      ],
+      "correct": "C"
+    },
+    {
+      "question": "How many parts are in the Leading test?",
+      "options": [
+        { "label": "A", "text": "Two" },
+        { "label": "B", "text": "Three" },
+        { "label": "C", "text": "Four" }
+      ],
+      "correct": "B"
+    },
+    {
+      "question": "What type of questions are included?",
+      "options": [
+        { "label": "A", "text": "Multiple choice" },
+        { "label": "B", "text": "True/False" },
+        { "label": "C", "text": "Matching" }
+      ],
+       "correct": "A"
+    }
+  ]
+}

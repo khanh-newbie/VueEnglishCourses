@@ -47,10 +47,18 @@ export default {
       return lessonsData[this.courseType] || [];
     }
   },
+  // methods: {
+  //   goToLesson(id) {
+  //     // Chuyển sang trang chi tiết bài học
+  //     this.$router.push({ name: "LectureDetail", params: { id } });
+  //   }
+  // }
   methods: {
     goToLesson(id) {
-      // Chuyển sang trang chi tiết bài học
-      this.$router.push({ name: "LectureDetail", params: { id } });
+      this.$router.push({
+      name: "LectureDetail",
+      params: { slug: this.slug, id }
+    });
     }
   }
 };

@@ -5,9 +5,10 @@ export const courses = [
     slug: "reading", 
     duration: "10 tuần", 
     price: "1.000.000 ₫", 
-    cover: "/images/toeic-reading.jpg",
+    cover: "/src/assets/images/bg.jpg",
     teacher: "Cô Diệp",
-    title: "Khoá học Toeic"
+    title: "Khoá học Toeic",
+    students: 0,
     },
     { 
     id: 2, 
@@ -15,9 +16,10 @@ export const courses = [
     slug: "listening", 
     duration: "16 tuần", 
     price: "1.260.000 ₫", 
-    cover: "/images/toeic-listening.jpg",
+    cover: "/src/assets/images/bg.jpg",
     teacher: "Cô Diệpp",
-    title: "Khoá học Toeic"
+    title: "Khoá học Toeic",
+    students: 0,
     },
 ]
 

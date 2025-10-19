@@ -21,9 +21,54 @@
       "description": "Sử dụng giới từ và liên từ giúp câu rõ nghĩa và logic."
     },
      {
-      "id": 2,
+      "id": 6,
       "title": "Lesson 6: Pronouns and Parallel Structure",
       "description": "Đại từ, đại từ quan hệ, và cấu trúc song song trong câu TOEIC."
+    },
+    {
+      "id": 7,
+      "title": "Lesson 7: Connecting Ideas in Paragraphs",
+      "description": "Dùng từ nối và cụm chuyển ý để hiểu mạch logic đoạn văn."
+    },
+    {
+      "id": 8,
+      "title": "Lesson 8: Vocabulary in Context",
+      "description": "Đoán nghĩa từ mới dựa vào ngữ cảnh đoạn văn TOEIC."
+    },
+    {
+      "id": 9,
+      "title": "Lesson 9: Grammar Review in Paragraphs",
+      "description": "Ôn lại ngữ pháp tổng hợp trong các đoạn văn hoàn chỉnh."
+    },
+    {
+      "id": 10,
+      "title": "Lesson 10: Practice Full Text Completion",
+      "description": "Làm bài luyện tập tổng hợp Part 6, kèm giải thích chi tiết."
+    },
+    {
+      "id": 11,
+      "title": "Lesson 11: Single Passage – Emails & Notices",
+      "description": "Đọc hiểu email và thông báo nội bộ, tìm thông tin nhanh."
+    },
+    {
+      "id": 12,
+      "title": "Lesson 12: Single Passage – Articles & Advertisements",
+      "description": "Cách chọn từ khóa và chiến lược đọc lướt nhanh."
+    },
+    {
+      "id": 13,
+      "title": "Lesson 13: Double Passages",
+      "description": "Phân tích mối liên hệ giữa hai đoạn văn."
+    },
+    {
+      "id": 14,
+      "title": "Lesson 14: Triple Passages",
+      "description": "Mẹo làm nhanh và tránh bẫy trong đoạn ba bài đọc."
+    },
+    {
+      "id": 15,
+      "title": "Lesson 15: Full Reading Test Simulation",
+      "description": "Làm bài mô phỏng toàn bộ Part 5–7, chấm điểm và phân tích."
     }
    
   ],
@@ -31,12 +76,77 @@
     {
       "id": 1,
       "title": "Lesson 1: Tổng quan kỹ năng Listening",
-      "description": "Giới thiệu các phần Part 1–4 trong bài thi Listening TOEIC."
+      "description": "Giới thiệu 4 phần nghe (Photographs, Question–Response, Conversations, Talks), cấu trúc đề, thời gian, và mẹo tập trung khi nghe."
     },
     {
       "id": 2,
-      "title": "Lesson 2: Photographs",
-      "description": "Luyện tập mô tả hình ảnh (Part 1)."
+      "title": "Lesson 2: Describing People’s Actions",
+      "description": "Từ vựng mô tả hành động của người trong ảnh."
+    },
+    {
+      "id": 3,
+      "title": "Lesson 3: Describing Objects and Places",
+      "description": "Học các mẫu câu nói về vị trí và đồ vật xung quanh."
+    },
+    {
+      "id": 4,
+      "title": "Lesson 4: Strategies for Part 1",
+      "description": "Kỹ năng nghe nhanh, nhận diện bẫy và loại trừ đáp án sai."
+    },
+    {
+      "id": 5,
+      "title": "Lesson 5: Yes/No Questions",
+      "description": "Cách phản ứng đúng với câu hỏi Yes/No."
+    },
+    {
+      "id": 6,
+      "title": "WH–Questions",
+      "description": "Nhận diện What, Where, Why, How và chọn câu trả lời phù hợp."
+    },
+    {
+      "id": 7,
+      "title": "Lesson 7: Indirect Questions and Tricky Answers",
+      "description": "Phân biệt câu hỏi gián tiếp, mẹo nghe câu đánh lạc hướng."
+    },
+    {
+      "id": 8,
+      "title": "Lesson 8: Identifying Topics and Speakers",
+      "description": "Cách xác định chủ đề và người nói trong đoạn hội thoại."
+    },
+    {
+      "id": 9,
+      "title": "Lesson 9: Listening for Key Details",
+      "description": "Nghe thông tin cụ thể như giá, thời gian, địa điểm."
+    },
+    {
+      "id": 10,
+      "title": "Lesson 10: Recognizing Intent and Attitude",
+      "description": "Hiểu mục đích, thái độ người nói."
+    },
+    {
+      "id": 11,
+      "title": "Lesson 11: Implied Meaning and Inference",
+      "description": "Nhận biết ý ẩn và suy luận logic."
+    },
+    {
+      "id": 12,
+      "title": "Lesson 12: Practice Conversations",
+      "description": "Luyện nghe 3 đoạn hội thoại có đáp án chi tiết."
+    },
+    {
+      "id": 13,
+      "title": "Lesson 13: Announcements and Messages",
+      "description": "Nghe thông báo, lời nhắn – nhận diện dạng câu hỏi thường gặp."
+    },
+    {
+      "id": 14,
+      "title": "Lesson 14: News Reports and Speeches",
+      "description": "Luyện nghe bản tin, bài phát biểu ngắn."
+    },
+    {
+      "id": 15,
+      "title": "Lesson 15: Full Listening Test Simulation",
+      "description": "Làm bài Listening TOEIC hoàn chỉnh để tổng kết."
     }
    
   ]
