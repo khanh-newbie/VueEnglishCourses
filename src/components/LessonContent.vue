@@ -1,14 +1,14 @@
 <template>
   <div class="col-md-9 px-5" style="text-align: center;" v-if="lesson">
-    <!-- Tiêu đề TOEIC -->
+    <!-- 🟦 Tiêu đề chính: Hiển thị loại khóa TOEIC (READING / LISTENING / SPEAKING / WRITING) -->
     <h3 class="fw-bold mb-3 mt-3">
-      TOEIC 
+      TOEIC {{ displaySlug }}
     </h3>
 
-    <!-- Tiêu đề bài học -->
+    <!-- 🟩 Tiêu đề bài học cụ thể -->
     <h5 class="mb-4">{{ lesson.title }}</h5>
 
-    <!-- Video -->
+    <!-- 🎥 Phần Video bài học -->
     <div class="ratio ratio-16x9 mb-4">
       <iframe
         :src="lesson.video"
@@ -18,15 +18,294 @@
         allowfullscreen
       ></iframe>
     </div>
+
+    <!-- 🔴 Nếu là SPEAKING: hiện phần thu âm -->
+    <div v-if="displaySlug === 'SPEAKING'" class="record-section mx-auto p-4 shadow-sm rounded-4 bg-white">
+      <h3 class="text-center fw-bold mb-4 text-primary">Speaking Practice</h3>
+
+      <!-- Hiển thị đề bài (prompt) -->
+      <div class="text-start mb-4 p-3 bg-light rounded-3 border">
+        <h5 class="fw-semibold">Your Task:</h5>
+        <p class="mt-2 fs-5">{{ lesson.prompt }}</p>
+      </div>
+
+      <!-- Nút điều khiển thu âm -->
+      <div class="mb-3">
+        <button
+          class="btn btn-danger me-2"
+          @click="startRecording"
+          :disabled="isRecording"
+        >
+          🔴 Start Recording
+        </button>
+        <button
+          class="btn btn-secondary"
+          @click="stopRecording"
+          :disabled="!isRecording"
+        >
+          ⏹ Stop
+        </button>
+      </div>
+
+      <!-- Khi có bản thu -->
+      <div v-if="audioUrl">
+        <p class="text-success">✅ Recording completed! You can listen or submit:</p>
+        <audio :src="audioUrl" controls></audio>
+        <div class="mt-3">
+          <button class="btn btn-success" @click="submitRecording">
+            📤 Submit Recording
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ✏️ Nếu là WRITING: hiện textarea nhập bài -->
+    <div v-else-if="displaySlug === 'WRITING'" class="writing-section mx-auto p-4 shadow-sm rounded-4 bg-white">
+      <h3 class="text-center fw-bold mb-4 text-primary">Writing Practice</h3>
+
+      <!-- Đề bài -->
+      <div class="text-start mb-4 p-3 bg-light rounded-3 border">
+        <h5 class="fw-semibold">Your Task:</h5>
+        <p class="mt-2 fs-5">{{ lesson.prompt }}</p>
+      </div>
+
+      <!-- Ô nhập bài -->
+      <textarea
+        v-model="writingAnswer"
+        class="form-control mb-3"
+        rows="6"
+        placeholder="Write your answer here..."
+      ></textarea>
+
+      <!-- Nút Submit -->
+      <div class="text-center">
+        <button class="btn btn-success px-4 py-2 fw-semibold" @click="submitWriting">
+          📤 Submit 
+        </button>
+      </div>
+    </div>
+
+    <!-- 🧩 Còn lại (READING / LISTENING): hiện quiz -->
+    <div v-else class="quiz-container mx-auto p-4 shadow-sm rounded-4 bg-white">
+      <h3 class="text-center fw-bold mb-4 text-primary">Mini Quiz</h3>
+      <form id="quizForm">
+        <div
+          v-for="(q, i) in currentQuiz"
+          :key="i"
+          class="quiz-question mb-5 text-start"
+        >
+          <p class="fw-semibold fs-5 mb-3">
+            {{ i + 1 }}. {{ q.question }}
+          </p>
+
+          <!-- Lặp qua các lựa chọn -->
+          <div
+            v-for="(opt, j) in q.options"
+            :key="j"
+            class="form-check mb-2 ps-4"
+          >
+            <input
+              class="form-check-input"
+              type="radio"
+              :name="'q' + i"
+              :id="'q' + i + opt.label"
+              :value="opt.label"
+              v-model="userAnswers[i]"
+            />
+            <label
+              class="form-check-label fs-6"
+              :for="'q' + i + opt.label"
+            >
+              <strong>{{ opt.label }}.</strong> {{ opt.text }}
+            </label>
+          </div>
+        </div>
+
+        <!-- Nút Gửi -->
+        <div class="text-center mt-4">
+          <button
+            class="btn btn-primary px-4 py-2 fw-semibold"
+            @click.prevent="submitQuiz"
+          >
+            Gửi
+          </button>
+        </div>
+      </form>
+    </div>
   </div>
 </template>
 
 <script setup>
+/* ===================================
+   🧠 LOGIC COMPONENT
+=================================== */
+
+import { ref, computed, onMounted, watch } from "vue";
+import { useRoute } from "vue-router";
+import readingQuiz from "../data/readingQuiz.json";
+import listeningQuiz from "../data/listeningQuiz.json";
+
+// Lấy route hiện tại để xác định slug (READING / LISTENING / SPEAKING / WRITING)
+const route = useRoute();
+
+// Nhận props từ component cha (truyền xuống là lesson hiện tại)
 const props = defineProps({
   lesson: Object,
 });
+
+// --- Hiển thị tiêu đề TOEIC ---
+const displaySlug = computed(() => {
+  const s = route.params.slug || "";
+  return s.toUpperCase();
+});
+
+// --- Quiz: danh sách câu hỏi & câu trả lời ---
+const currentQuiz = ref([]);
+const userAnswers = ref([]);
+const score = ref(null);
+
+// --- Load quiz theo bài học ---
+const loadQuiz = () => {
+  if (!props.lesson) return;
+  const slug = route.params.slug;
+  const lessonId = props.lesson.id;
+
+  const quizData = slug === "reading" ? readingQuiz : listeningQuiz;
+  currentQuiz.value = quizData[lessonId] || [];
+  userAnswers.value = Array(currentQuiz.value.length).fill(null);
+  score.value = null;
+};
+
+// --- Khi component mount hoặc thay đổi bài học ---
+onMounted(() => loadQuiz());
+watch(() => props.lesson, () => loadQuiz(), { deep: true });
+
+// --- Nút gửi quiz ---
+function submitQuiz() {
+  let correct = 0;
+  currentQuiz.value.forEach((q, i) => {
+    if (userAnswers.value[i] === q.correct) correct++;
+  });
+  score.value = correct;
+  alert(`Bạn đúng ${correct}/${currentQuiz.value.length} câu!`);
+}
+
+/* 🎙️ PHẦN SPEAKING - GHI ÂM */
+const isRecording = ref(false);
+const audioUrl = ref(null);
+let mediaRecorder;
+let audioChunks = [];
+
+const startRecording = async () => {
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    mediaRecorder = new MediaRecorder(stream);
+    audioChunks = [];
+
+    mediaRecorder.ondataavailable = (e) => {
+      if (e.data.size > 0) audioChunks.push(e.data);
+    };
+
+    mediaRecorder.onstop = () => {
+      const blob = new Blob(audioChunks, { type: "audio/wav" });
+      audioUrl.value = URL.createObjectURL(blob);
+    };
+
+    mediaRecorder.start();
+    isRecording.value = true;
+  } catch (err) {
+    alert("Không thể truy cập micro!");
+    console.error(err);
+  }
+};
+
+const stopRecording = () => {
+  if (mediaRecorder && mediaRecorder.state !== "inactive") {
+    mediaRecorder.stop();
+  }
+  isRecording.value = false;
+};
+
+const submitRecording = async () => {
+  alert("✅ Đã gửi bản thu âm!");
+  // Sau này có thể upload file audio ở đây
+};
+
+/* ✏️ PHẦN WRITING */
+const writingAnswer = ref("");
+
+function submitWriting() {
+  if (!writingAnswer.value.trim()) {
+    alert("✏️ Please write your answer before submitting!");
+    return;
+  }
+  alert("✅ Your writing has been submitted!");
+  writingAnswer.value = "";
+}
 </script>
 
 <style scoped>
-/* Chỉ còn video và tiêu đề */
+/* ====== Quiz chung ====== */
+.quiz-container {
+  max-width: 650px;
+  background-color: #ffffff;
+  border: 1px solid #eaeaea;
+}
+
+.quiz-question {
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 15px;
+}
+
+.quiz-question:last-child {
+  border-bottom: none;
+}
+
+.form-check-input {
+  transform: scale(1.2);
+  margin-top: 0.35rem;
+}
+
+.form-check-label {
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.form-check-label:hover {
+  color: #0d6efd;
+}
+
+.btn-primary {
+  border-radius: 10px;
+  transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+  background-color: #0b5ed7;
+  transform: scale(1.03);
+}
+
+/* ====== Speaking ====== */
+.record-section {
+  max-width: 650px;
+  background-color: #ffffff;
+  border: 1px solid #eaeaea;
+}
+
+.record-section button {
+  min-width: 150px;
+}
+
+/* ====== Writing ====== */
+.writing-section {
+  max-width: 650px;
+  background-color: #ffffff;
+  border: 1px solid #eaeaea;
+}
+
+.writing-section textarea {
+  font-size: 1rem;
+  padding: 12px;
+  resize: vertical;
+}
 </style>

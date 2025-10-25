@@ -1,14 +1,19 @@
 <template>
+  <!-- 🧩 PHẦN NỘI DUNG CHÍNH -->
   <div id="content" class="py-5">
     <div class="container-fluid">
       <div class="row">
-        <!-- Danh sách bài học -->
+        <!-- 🧠 1️⃣ DANH SÁCH BÀI HỌC (LessonList.vue)
+             - Hiển thị tất cả bài học thuộc khóa hiện tại
+             - Khi click chọn bài, phát ra event selectLesson -->
         <LessonList
           :lessons="lessons"
-          @selectLesson="selectedLesson = $event"
+          :courseId="slugType"
+          @selectLesson="handleSelectLesson"
         />
 
-        <!-- Nội dung bài học -->
+        <!-- 📚 2️⃣ NỘI DUNG BÀI HỌC (LessonContent.vue)
+             - Hiển thị nội dung chi tiết bài đang chọn -->
         <LessonContent :lesson="selectedLesson" />
       </div>
     </div>
@@ -16,42 +21,85 @@
 </template>
 
 <script setup>
+/* 
+===========================================
+🎯 LOGIC CHÍNH CHO TRANG HỌC
+- Lấy danh sách bài học theo khóa (reading, listening, speaking, writing)
+- Theo dõi route để tải đúng file JSON
+- Hiển thị danh sách + nội dung bài học
+===========================================
+*/
+
 import { ref, onMounted, watch } from "vue";
 import { useRoute } from "vue-router";
 import LessonList from "../components/LessonList.vue";
 import LessonContent from "../components/LessonContent.vue";
-import readingLessons from "../data/readingLesson.json";
-import listeningLessons from "../data/listeningLesson.json";
+import { useCourseStore } from "../stores/courseStore.js";
 
-const route = useRoute();
-const lessons = ref([]);
-const selectedLesson = ref(null);
+/* 🔹 Biến trạng thái */
+const route = useRoute();              // Lấy thông tin từ URL
+const lessons = ref([]);               // Danh sách bài học
+const selectedLesson = ref(null);      // Bài học đang được chọn
+const courseStore = useCourseStore();
 
+
+// Xác định loại khóa học từ slug
+const slugType = ref(route.params.slug || "");
+
+// Khi user chọn bài
+const handleSelectLesson = (lesson, index) => {
+  if (courseStore.isLessonLocked(index, slugType.value)) {
+    alert("🔒 Bạn cần đăng nhập và mua khóa học để xem bài này!");
+    return;
+  }
+  selectedLesson.value = lesson;
+};
+
+/* 
+-------------------------------------------
+🔸 HÀM loadLessons()
+- Xác định khóa học từ slug (vd: reading)
+- Load file JSON tương ứng (readingLesson.json, ...)
+- Tìm bài học theo id (nếu có trong URL)
+-------------------------------------------
+*/
 async function loadLessons() {
-  const slug = route.params.slug;  // reading hoặc listening
+  const slug = route.params.slug;           // reading, listening, speaking, writing
   const lessonId = Number(route.params.id); // id bài học trong URL
 
   try {
-    //load file JSON tương ứng
-    let data = [];
-    if (slug === "reading") {
-      data = (await import("../data/readingLesson.json")).default;
-    } else if (slug === "listening") {
-      data = (await import("../data/listeningLesson.json")).default;
-    }
+    // 📂 Import file JSON theo loại khóa học
+    const module = await import(`../data/${slug}Lesson.json`);
+    lessons.value = module.default;
 
-    lessons.value = data;
+    // ✅ Chọn bài theo id, nếu không có thì chọn bài đầu tiên
     selectedLesson.value =
       lessons.value.find((l) => l.id === lessonId) || lessons.value[0];
   } catch (err) {
-    console.error("Lỗi khi load dữ liệu bài học:", err);
+    console.error(`❌ Không tìm thấy dữ liệu cho slug: ${slug}`, err);
+    lessons.value = [];
+    selectedLesson.value = null;
   }
 }
 
-// Load khi component mount
+/* 
+-------------------------------------------
+🚀 KHI COMPONENT MOUNT
+- Gọi loadLessons() lần đầu tiên
+-------------------------------------------
+*/
 onMounted(loadLessons);
 
-// Nếu chuyển route (VD: từ reading sang listening), thì reload
+/* 
+-------------------------------------------
+👀 THEO DÕI ROUTE THAY ĐỔI
+- Nếu user chuyển từ khóa reading → writing
+  thì tự động load lại bài học
+-------------------------------------------
+*/
 watch(() => route.fullPath, loadLessons);
 </script>
 
+<style scoped>
+/* 🎨 STYLE RIÊNG CHO TRANG BÀI HỌC (nếu cần thêm sau) */
+</style>

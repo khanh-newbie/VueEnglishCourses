@@ -10,6 +10,11 @@
       "title": "Lesson 2: Tenses and Verb Forms",
       "description": "Ôn lại các thì thường gặp trong TOEIC và cách chia động từ đúng ngữ cảnh."
     },
+    {
+      "id": 3,
+      "title": "Lesson 3: Adjectives and Adverbs",
+      "description": "Phân biệt tính từ – trạng từ và vị trí của chúng trong câu"
+    },
      {
       "id": 4,
       "title": "Lesson 4: Adjectives and Adverbs",
@@ -149,5 +154,160 @@
       "description": "Làm bài Listening TOEIC hoàn chỉnh để tổng kết."
     }
    
+  ],
+  "speaking": [
+    {
+      "id": 1,
+      "title": "Lesson 1: Tổng quan kỹ năng Speaking TOEIC",
+      "description": "Giới thiệu 11 câu hỏi của phần thi Speaking, thang điểm, và chiến lược luyện tập hiệu quả."
+    },
+    {
+      "id": 2,
+      "title": "Lesson 2: Pronunciation and Intonation",
+      "description": "Luyện phát âm, nhấn trọng âm và ngữ điệu tự nhiên khi nói tiếng Anh."
+    },
+    {
+      "id": 3,
+      "title": "Lesson 3: Speaking Fluency and Timing",
+      "description": "Kỹ năng nói mạch lạc, giữ nhịp tự nhiên, và tránh nói quá nhanh hoặc quá chậm."
+    },
+    {
+      "id": 4,
+      "title": "Lesson 4: Reading Aloud – Tone and Pauses",
+      "description": "Luyện đọc to đoạn văn với ngữ điệu phù hợp và ngắt nghỉ tự nhiên."
+    },
+    {
+      "id": 5,
+      "title": "Lesson 5: Picture Description – People and Actions",
+      "description": "Mô tả người và hành động trong ảnh, mở rộng vốn từ vựng."
+    },
+    {
+      "id": 6,
+      "title": "Lesson 6: Picture Description – Places and Objects",
+      "description": "Mô tả địa điểm, đồ vật, và khung cảnh xung quanh."
+    },
+    {
+      "id": 7,
+      "title": "Lesson 7: Short Responses – Daily Topics",
+      "description": "Trả lời câu hỏi ngắn về các chủ đề quen thuộc (công việc, sở thích...)."
+    },
+    {
+      "id": 8,
+      "title": "Lesson 8: Extended Responses – Giving Details",
+      "description": "Học cách trả lời dài, có chi tiết và ví dụ minh họa."
+    },
+    {
+      "id": 9,
+      "title": "Lesson 9: Using Opinion and Reasoning",
+      "description": "Cách trình bày quan điểm, lý do, và ví dụ cụ thể khi nói."
+    },
+    {
+      "id": 10,
+      "title": "Lesson 10: Giving Suggestions and Solutions",
+      "description": "Trả lời tình huống: đưa ra giải pháp hợp lý và tự nhiên."
+    },
+    {
+      "id": 11,
+      "title": "Lesson 11: Agreeing and Disagreeing Politely",
+      "description": "Cách bày tỏ đồng ý/không đồng ý một cách lịch sự."
+    },
+    {
+      "id": 12,
+      "title": "Lesson 12: Expressing Opinions on Common Issues",
+      "description": "Luyện nói về các chủ đề như công nghệ, môi trường, học tập."
+    },
+    {
+      "id": 13,
+      "title": "Lesson 13: Common Phrases for TOEIC Speaking",
+      "description": "Tổng hợp mẫu câu và cụm từ ăn điểm khi trả lời Speaking."
+    },
+    {
+      "id": 14,
+      "title": "Lesson 14: Speaking Mock Test",
+      "description": "Làm bài thi Speaking mô phỏng, luyện tập theo thời gian thực."
+    },
+    {
+      "id": 15,
+      "title": "Lesson 15: Feedback & Improvement Strategies",
+      "description": "Phân tích lỗi phát âm, ngữ pháp, và luyện sửa để đạt điểm cao hơn."
+    }
+  ],
+  "writing": [
+    {
+      "id": 1,
+      "title": "Lesson 1: Tổng quan kỹ năng Writing TOEIC",
+      "description": "Giới thiệu cấu trúc bài thi Writing (8 câu hỏi), thang điểm và yêu cầu từng phần."
+    },
+    {
+      "id": 2,
+      "title": "Lesson 2: Sentence Structure & Grammar Review",
+      "description": "Ôn lại cấu trúc câu, thì, và cách dùng ngữ pháp chính xác trong viết."
+    },
+    {
+      "id": 3,
+      "title": "Lesson 3: Vocabulary for Business Contexts",
+      "description": "Từ vựng thường gặp trong email, thông báo, và bài viết TOEIC."
+    },
+    {
+      "id": 4,
+      "title": "Lesson 4: Describing Pictures in Sentences",
+      "description": "Viết câu mô tả ảnh ngắn, sử dụng thì hiện tại đơn và tiếp diễn."
+    },
+    {
+      "id": 5,
+      "title": "Lesson 5: Using Adjectives and Prepositions",
+      "description": "Thêm tính từ, giới từ để câu viết sinh động và chính xác hơn."
+    },
+    {
+      "id": 6,
+      "title": "Lesson 6: Writing Clear and Complete Sentences",
+      "description": "Tránh lỗi câu thiếu chủ ngữ, vị ngữ, và cách viết câu hoàn chỉnh."
+    },
+    {
+      "id": 7,
+      "title": "Lesson 7: Understanding Email Prompts",
+      "description": "Phân tích đề bài email, xác định mục tiêu và người nhận."
+    },
+    {
+      "id": 8,
+      "title": "Lesson 8: Writing a Clear and Polite Response",
+      "description": "Cấu trúc email chuẩn TOEIC: mở – nội dung – kết thúc."
+    },
+    {
+      "id": 9,
+      "title": "Lesson 9: Common Business Expressions",
+      "description": "Các mẫu câu phổ biến trong thư phản hồi công việc."
+    },
+    {
+      "id": 10,
+      "title": "Lesson 10: Structuring an Opinion Essay",
+      "description": "Bố cục bài luận TOEIC: mở bài – thân bài – kết luận."
+    },
+    {
+      "id": 11,
+      "title": "Lesson 11: Giving Reasons and Examples",
+      "description": "Cách phát triển ý chính bằng ví dụ cụ thể."
+    },
+    {
+      "id": 12,
+      "title": "Lesson 12: Linking Words and Cohesion",
+      "description": "Dùng từ nối để bài viết mạch lạc và trôi chảy."
+    },
+    {
+      "id": 13,
+      "title": "Lesson 13: Common Mistakes in TOEIC Writing",
+      "description": "Nhận biết và sửa các lỗi ngữ pháp, từ vựng thường gặp."
+    },
+    {
+      "id": 14,
+      "title": "Lesson 14: Writing Mock Test",
+      "description": "Làm bài Writing mô phỏng, luyện viết dưới áp lực thời gian."
+    },
+    {
+      "id": 15,
+      "title": "Lesson 15: Review and Improvement Plan",
+      "description": "Tổng hợp kỹ năng, đánh giá điểm mạnh – yếu và kế hoạch luyện tập."
+    }
   ]
+
 }

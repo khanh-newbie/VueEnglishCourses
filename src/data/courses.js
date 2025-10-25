@@ -21,5 +21,27 @@ export const courses = [
     title: "Khoá học Toeic",
     students: 0,
     },
+    { 
+    id: 3, 
+    name: "Toeic Speaking", 
+    slug: "speaking", 
+    duration: "16 tuần", 
+    price: "1.300.000 ₫", 
+    cover: "/src/assets/images/bg.jpg",
+    teacher: "Mr Hai",
+    title: "Khoá học Toeic",
+    students: 0,
+    },
+    { 
+    id: 4, 
+    name: "Toeic Writing", 
+    slug: "writing", 
+    duration: "16 tuần", 
+    price: "1.260.000 ₫", 
+    cover: "/src/assets/images/bg.jpg",
+    teacher: "Mrs Oanh",
+    title: "Khoá học Toeic",
+    students: 0,
+    },
 ]
 

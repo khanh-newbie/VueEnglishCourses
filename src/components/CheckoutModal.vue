@@ -1,21 +1,34 @@
 <template>
   <div>
+    <!-- 🌫 Lớp nền mờ phía sau modal, bấm vào thì đóng -->
     <div class="modal-backdrop" v-if="open" @click="close"></div>
 
+    <!-- Hiệu ứng xuất hiện biến mất của modal -->
     <transition name="fade">
+      <!-- 🧾 Hộp modal chính -->
       <div v-show="open" class="checkout-modal card p-3 shadow-lg">
+
+        <!-- 🔹 Header của modal -->
         <div class="d-flex justify-content-between align-items-center mb-2">
           <h5 class="mb-0">Thanh toán</h5>
+          <!-- Nút đóng -->
           <button class="btn-close" @click="close"></button>
         </div>
 
+        <!-- 🔸 Nếu giỏ hàng trống -->
         <div v-if="cart.length === 0" class="text-center text-muted py-4">
           Giỏ hàng trống
         </div>
 
+        <!-- 🔸 Nếu giỏ hàng có sản phẩm -->
         <div v-else>
+          <!-- Danh sách các sản phẩm trong giỏ -->
           <ul class="list-group mb-3">
-            <li class="list-group-item d-flex justify-content-between align-items-center" v-for="it in cart" :key="it.id">
+            <li
+              class="list-group-item d-flex justify-content-between align-items-center"
+              v-for="it in cart"
+              :key="it.id"
+            >
               <div>
                 <div class="fw-bold">{{ it.name }}</div>
                 <small class="text-muted">{{ it.duration }}</small>
@@ -24,24 +37,29 @@
             </li>
           </ul>
 
+          <!-- 💰 Tổng tiền -->
           <div class="d-flex justify-content-between align-items-center mb-3">
             <div><strong>Tổng</strong></div>
             <div class="fw-bold">{{ totalPrice }} ₫</div>
           </div>
 
-          <form @submit.prevent="onPay">
+          <!-- 🧍 Form nhập thông tin người thanh toán -->
+          <form>
             <div class="mb-2">
               <label class="form-label small">Họ và tên</label>
               <input v-model="form.name" class="form-control form-control-sm" required />
             </div>
+
             <div class="mb-2">
               <label class="form-label small">Email</label>
               <input v-model="form.email" type="email" class="form-control form-control-sm" required />
             </div>
+
             <div class="mb-2">
               <label class="form-label small">Địa chỉ</label>
               <input v-model="form.address" class="form-control form-control-sm" />
             </div>
+
             <div class="mb-3">
               <label class="form-label small">Phương thức (giả lập)</label>
               <select v-model="form.method" class="form-select form-select-sm">
@@ -50,19 +68,30 @@
               </select>
             </div>
 
+            <!-- Nút hủy và thanh toán -->
             <div class="d-flex justify-content-between align-items-center">
               <button class="btn btn-secondary btn-sm" type="button" @click="close">Hủy</button>
-              <button class="btn btn-primary btn-sm" :disabled="processing">
-                <span v-if="processing" class="spinner-border spinner-border-sm me-2" role="status"></span>
+
+              <button type="button" class="btn btn-primary btn-sm" :disabled="processing" @click="onPay">
+                <!-- Hiện spinner nếu đang xử lý -->
+                <span
+                  v-if="processing"
+                  class="spinner-border spinner-border-sm me-2"
+                  role="status"
+                ></span>
                 {{ processing ? 'Đang xử lý...' : 'Thanh toán' }}
               </button>
             </div>
           </form>
 
+          <!-- 🧾 Hiển thị kết quả sau thanh toán -->
           <div v-if="result" class="mt-3">
+            <!-- Cảnh báo / thành công -->
             <div :class="result.success ? 'alert alert-success' : 'alert alert-danger'">
               {{ result.message }}
             </div>
+
+            <!-- Nếu thanh toán thành công thì hiển thị mã đơn -->
             <div v-if="result.success" class="small text-muted">
               Mã hoá đơn: <strong>{{ result.orderId }}</strong>
             </div>
@@ -75,19 +104,38 @@
 
 <script>
 import { ref, computed, watch } from 'vue'
+import { useRouter } from 'vue-router'
+import { useUserStore } from '../stores/userStore.js'
+import { useOrderStore } from '../stores/orderStore.js'
+import { useCartStore } from '../stores/cartStore.js' // ✅ Store giỏ hàng
 
 export default {
   name: 'CheckoutModal',
+
+  // Nhận props từ cha (trạng thái mở & danh sách giỏ hàng)
   props: {
     open: { type: Boolean, default: false },
     cart: { type: Array, default: () => [] }
   },
+
+  // Các sự kiện gửi ngược lên cha
   emits: ['close', 'paid'],
+
   setup(props, { emit }) {
+    // Khai báo router & các store
+    const router = useRouter()
+    const userStore = useUserStore()
+    const orderStore = useOrderStore()
+    const cartStore = useCartStore()
+
+    // Dữ liệu form người mua
     const form = ref({ name: '', email: '', address: '', method: 'card' })
+
+    // Trạng thái xử lý & kết quả
     const processing = ref(false)
     const result = ref(null)
 
+    // ✅ Tính tổng giá trị đơn hàng
     const totalPrice = computed(() => {
       const sum = props.cart.reduce(
         (s, it) => s + Number(it.price.replace(/\./g, '').replace(' ₫', '')),
@@ -96,52 +144,116 @@ export default {
       return sum.toLocaleString()
     })
 
+    // ✅ Hàm đóng modal
     const close = () => emit('close')
 
+    // ✅ Khi modal mở -> tự động điền thông tin người dùng (nếu có)
+    watch(
+      () => props.open,
+      (isOpen) => {
+        if (isOpen && userStore.user) {
+          form.value.name = userStore.user.name || ''
+          form.value.email = userStore.user.email || ''
+        }
+      },
+      { immediate: true }
+    )
+
+    // ✅ Hàm thanh toán
     const onPay = () => {
-      if (!form.value.name || !form.value.email) {
-        result.value = { success: false, message: 'Vui lòng điền tên và email.' }
+      if (processing.value) return // chặn double click
+      processing.value = true // bật trạng thái xử lý
+
+      // 1️⃣ Kiểm tra đăng nhập
+      if (!userStore.user) {
+        result.value = { success: false, message: '⚠️ Vui lòng đăng nhập trước khi thanh toán.' }
+        processing.value = false
         return
       }
-      processing.value = true
-      result.value = null
 
+      // 2️⃣ Kiểm tra form
+      if (!form.value.name || !form.value.email) {
+        result.value = { success: false, message: 'Vui lòng điền tên và email.' }
+        processing.value = false
+        return
+      }
+
+      result.value = null // reset kết quả
+
+      // 3️⃣ Giả lập xử lý thanh toán sau 1s
       setTimeout(() => {
-        const orderId = 'ORD' + Date.now()
+        // Tạo mã đơn hàng
+        const orderId = 'ORD' + Date.now() + '-' + Math.floor(Math.random() * 1000)
+
+        // Tạo object đơn hàng
         const order = {
           id: orderId,
-          items: props.cart.slice(),
+          items: props.cart.slice(), // copy danh sách giỏ hàng
           total: totalPrice.value,
           customer: { ...form.value },
           method: form.value.method,
-          createdAt: new Date().toISOString()
+          createdAt: new Date().toISOString(),
+          userEmail: userStore.user.email // để lọc đơn theo user
         }
+
+        // 4️⃣ Lưu đơn hàng vào store
+        orderStore.addOrder(order)
+
+        // 5️⃣ Xoá giỏ hàng sau khi thanh toán
+        cartStore.clearCart()
+
+        // 6️⃣ Mở khóa khóa học đã mua
+        order.items.forEach(it => {
+          userStore.purchaseCourse(it.slug)
+        })
+
+        // 7️⃣ Gửi sự kiện "paid" cho cha
         emit('paid', order)
+
+        // 8️⃣ Hiển thị kết quả thanh toán
         processing.value = false
-        result.value = { success: true, message: 'Thanh toán giả lập thành công!', orderId }
-      }, 1400)
+        result.value = { success: true, message: '✅ Thanh toán giả lập thành công!', orderId }
+
+        // 9️⃣ Sau 1 giây: đóng modal + chuyển sang trang /orders
+        setTimeout(() => {
+          emit('close')
+          router.push('/orders')
+        }, 1000)
+      }, 1000)
     }
 
+    // Trả ra để template dùng
     return { form, processing, result, totalPrice, close, onPay }
   }
 }
 </script>
 
 <style scoped>
+/* 🌫 Nền đen mờ khi mở modal */
 .modal-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.45);
+  background: rgba(0, 0, 0, 0.45);
   z-index: 1040;
 }
+
+/* 🧾 Khung modal chính */
 .checkout-modal {
   position: fixed;
   right: 20px;
-  top: 80px;
+  top: 0px;
   width: 360px;
   z-index: 1050;
   border-radius: 0.5rem;
 }
-.fade-enter-active, .fade-leave-active { transition: opacity .15s ease; }
-.fade-enter-from, .fade-leave-to { opacity: 0; }
+
+/* ✨ Hiệu ứng fade in/out */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.15s ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
 </style>

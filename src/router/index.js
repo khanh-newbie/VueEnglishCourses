@@ -4,6 +4,7 @@ import Course from '../views/Courses.vue'
 import CourseDetail from '../views/CourseDetail.vue'
 import Contact from '../views/Contact.vue'
 import LectureDetail from '../views/LectureDetail.vue'
+import OrderHistory from '../views/OrderHistory.vue'
 
 const routes = [
   { path: '/', name: 'Home', component: Index },
@@ -22,6 +23,12 @@ const routes = [
     component: LectureDetail,
     props: true
   },
+  { path: '/orders', 
+    name: 'OrderHistory', 
+    component: OrderHistory,
+    props: true
+  },
+
 ]
 
 const router = createRouter({

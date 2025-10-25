@@ -1,0 +1,78 @@
+[
+  {
+    "id": 1,
+    "title": "Lesson 1: Tổng quan kỹ năng Writing TOEIC",
+    "video": "https://www.youtube.com/embed/6E4mKpqC8Uo?si=janAMkZcSO-z-kWb",
+    "prompt": "Please introduce yourself in English. Talk about your name, where you live, and what you like to do in your free time."
+  },
+  {
+    "id": 2,
+    "title": "Lesson 2: Tenses and Verb Forms",
+    "video": "https://www.youtube.com/embed/nPLv2A66qac",
+    "prompt": "Describe your daily routine using different tenses."
+  },
+  {
+    "id": 3,
+    "title": "Lesson 3: Understanding Context",
+    "video": "https://www.youtube.com/embed/YOUR_VIDEO_ID_3"
+  },
+  {
+    "id": 4,
+    "title": "Lesson 4: Adjectives and Adverbs",
+    "video": "https://www.youtube.com/embed/YOUR_VIDEO_ID_3"
+  },
+  {
+    "id": 5,
+    "title": "Lesson 5: Prepositions and Conjunctions",
+    "video": "https://www.youtube.com/embed/YOUR_VIDEO_ID_3"
+  },
+  {
+    "id": 6,
+    "title": "Lesson 6: Pronouns and Parallel Structure",
+    "video": "https://www.youtube.com/embed/YOUR_VIDEO_ID_3"
+  },
+  {
+    "id": 7,
+    "title": "Lesson 7: Connecting Ideas in Paragraphs",
+    "video": "https://www.youtube.com/embed/YOUR_VIDEO_ID_3"
+  },
+  {
+    "id": 8,
+    "title": "Lesson 8: Vocabulary in Context",
+    "video": "https://www.youtube.com/embed/YOUR_VIDEO_ID_3"
+  },
+  {
+    "id": 9,
+    "title": "Lesson 9: Grammar Review in Paragraphs",
+    "video": "https://www.youtube.com/embed/YOUR_VIDEO_ID_3"
+  },
+  {
+    "id": 10,
+    "title": "Lesson 10: Practice Full Text Completion",
+    "video": "https://www.youtube.com/embed/YOUR_VIDEO_ID_3"
+  },
+  {
+    "id": 11,
+    "title": "Lesson 11: Single Passage – Emails & Notices",
+    "video": "https://www.youtube.com/embed/YOUR_VIDEO_ID_3"
+  },
+  {
+    "id": 12,
+    "title": "Lesson 12: Tổng quan kỹ năng Speaking TOEIC",
+    "video": "https://www.youtube.com/embed/ZphkR2XsjM4?si=OVtGeaTcWVM9Qfcs",
+    "prompt": "Please introduce yourself in English. Talk about your name, where you live, and what you like to do in your free time."
+  },
+  {
+    "id": 13,
+    "title": "Lesson 13: Tổng quan kỹ năng Speaking TOEIC",
+    "video": "https://www.youtube.com/embed/ZphkR2XsjM4?si=OVtGeaTcWVM9Qfcs",
+    "prompt": "Please introduce yourself in English. Talk about your name, where you live, and what you like to do in your free time."
+  },
+  {
+    "id": 14,
+    "title": "Lesson 14: Tổng quan kỹ năng Speaking TOEIC",
+    "video": "https://www.youtube.com/embed/ZphkR2XsjM4?si=OVtGeaTcWVM9Qfcs",
+    "prompt": "Please introduce yourself in English. Talk about your name, where you live, and what you like to do in your free time."
+  }
+
+]
