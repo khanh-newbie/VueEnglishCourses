@@ -86,6 +86,7 @@ import { onMounted } from 'vue'
 import { useCartStore } from '../stores/cartStore.js'
 import { useUserStore } from '../stores/userStore.js'
 import { useOrderStore } from '../stores/orderStore.js'
+import { useNotificationStore } from '../stores/notificationStore.js'
 
 export default {
   name: "Course",
@@ -100,14 +101,16 @@ export default {
       orderStore.init()
     })
 
+    const notify = useNotificationStore()
+
     // 🛒 Hàm thêm khóa học vào giỏ hàng
     const addToCart = (course) => {
       if (!userStore.user) {
-        alert("⚠️ Vui lòng đăng nhập trước khi thêm vào giỏ hàng!")
+        notify.show('⚠️ Vui lòng đăng nhập trước khi thêm vào giỏ hàng!', 'error')
         return
       }
       cartStore.addToCart(course)
-      alert("✅ Đã thêm vào giỏ hàng!")
+      notify.show('✅ Đã thêm vào giỏ hàng!', 'success')
     }
 
     // Xuất dữ liệu và hàm ra template

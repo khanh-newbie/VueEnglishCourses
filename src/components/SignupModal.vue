@@ -20,6 +20,7 @@
           <label>Họ tên</label>
           <!-- Dùng `v-model` để ràng buộc dữ liệu 2 chiều với biến `name` -->
           <input v-model="name" type="text" class="form-control" required />
+          <small v-if="errors.name" class="text-danger">{{ errors.name }}</small>
         </div>
 
         <!-- Ô nhập email -->
@@ -27,6 +28,7 @@
           <label>Email</label>
           <!-- Dữ liệu nhập vào được lưu trong biến `email` -->
           <input v-model="email" type="email" class="form-control" required />
+          <small v-if="errors.email" class="text-danger">{{ errors.email }}</small>
         </div>
 
         <!-- Ô nhập mật khẩu -->
@@ -34,6 +36,8 @@
           <label>Mật khẩu</label>
           <!-- Dữ liệu nhập vào được lưu trong biến `password` -->
           <input v-model="password" type="password" class="form-control" required />
+          <small v-if="errors.password" class="text-danger">{{ errors.password }}</small>
+          
         </div>
 
         <!-- Nút submit form -->
@@ -68,6 +72,7 @@
 
 import { ref } from 'vue'               // Dùng `ref()` để khai báo biến phản ứng (reactive)
 import { useUserStore } from '../stores/userStore.js' // Import store quản lý người dùng
+import { useNotificationStore } from '../stores/notificationStore.js';
 
 // ---- Định nghĩa props và sự kiện ----
 defineProps({ open: Boolean })           // Nhận prop `open` từ component cha, điều khiển hiển thị modal
@@ -77,25 +82,48 @@ defineEmits(['close', 'open-login'])     // Khai báo 2 sự kiện có thể ph
 const name = ref('')                     // Lưu tên người dùng nhập vào
 const email = ref('')                    // Lưu email
 const password = ref('')                 // Lưu mật khẩu
+const errors = ref({})
 const userStore = useUserStore()         // Gọi store để thao tác với dữ liệu người dùng
+
+const validateForm = () => {
+  const e = {}
+
+  // Họ tên
+  if (!name.value.trim()) e.name = 'Vui lòng nhập họ tên.'
+
+  // Email
+  if (!email.value.trim()) {
+    e.email = 'Vui lòng nhập email.'
+  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {
+    e.email = 'Email không hợp lệ.'
+  }
+
+  // Mật khẩu
+  if (!password.value.trim()) {
+    e.password = 'Vui lòng nhập mật khẩu.'
+  } else if (password.value.length < 6) {
+    e.password = 'Mật khẩu phải có ít nhất 6 ký tự.'
+  }
+
+  errors.value = e
+  return Object.keys(e).length === 0
+}
 
 // ---- Hàm xử lý khi người dùng nhấn "Đăng ký" ----
 const handleSignup = () => {
-  // Gọi hàm signup trong userStore, truyền vào 3 giá trị người dùng nhập
-  const ok = userStore.signup(name.value, email.value, password.value)
+  if (!validateForm()) return
 
-  // Nếu đăng ký thành công
+  const ok = userStore.signup(name.value, email.value, password.value)
+  const notify = useNotificationStore()
+
   if (ok) {
-    alert('Đăng ký thành công!')
-    // Reset lại dữ liệu nhập
     name.value = ''
     email.value = ''
     password.value = ''
-    // Gửi sự kiện "close" để đóng modal
+    errors.value = {}
     emit('close')
   } else {
-    // Nếu email đã tồn tại thì thông báo lỗi
-    alert('Email này đã được đăng ký!')
+    notify.show = ('Email này đã được đăng ký!', 'error')
   }
 }
 </script>

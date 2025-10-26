@@ -24,8 +24,11 @@
               Xem trước
             </button>
             <i
-              v-if="isLocked(index)"
-              class="bi bi-lock-fill ms-2 text-secondary"
+              :class="[
+                'ms-2',
+                isLocked(index) ? 'bi bi-lock-fill text-secondary' : 'bi bi-unlock-fill text-success'
+              ]"
+              style="font-size: 1.2rem;"
             ></i>
           </div>
         </div>
@@ -44,6 +47,7 @@ import lessonsData from "../data/lesson.json";
 import { useUserStore } from "../stores/userStore.js";
 import { useCourseStore } from '../stores/courseStore.js'
 import { useRouter } from "vue-router";
+import { useNotificationStore } from "../stores/notificationStore.js";
 
 const props = defineProps({
   courseType: { type: String, required: true },
@@ -59,10 +63,12 @@ const filteredLessons = computed(() => lessonsData[props.courseType] || []);
 // kiểm tra bài học có bị khóa hay không
 const isLocked = (index) => courseStore.isLessonLocked(index, String(props.courseId))
 
+const notify = useNotificationStore()
+
 // đi đến trang bài học
 const goToLesson = (id, index) => {
   if (isLocked(index)) {
-    alert("🔒 Bạn cần đăng nhập và mua khóa học để xem bài này!");
+    notify.show('🔒 Bạn cần đăng nhập và mua khóa học để xem bài này!', 'error');
     return;
   }
   router.push({
@@ -87,4 +93,11 @@ const goToLesson = (id, index) => {
 .text-muted {
   cursor: not-allowed;
 }
+i {
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+i:hover {
+  transform: scale(1.2);
+}
+
 </style>

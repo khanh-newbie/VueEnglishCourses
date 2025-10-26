@@ -35,6 +35,7 @@ import { useRoute } from "vue-router";
 import LessonList from "../components/LessonList.vue";
 import LessonContent from "../components/LessonContent.vue";
 import { useCourseStore } from "../stores/courseStore.js";
+import { useNotificationStore } from "../stores/notificationStore.js";
 
 /* 🔹 Biến trạng thái */
 const route = useRoute();              // Lấy thông tin từ URL
@@ -45,11 +46,12 @@ const courseStore = useCourseStore();
 
 // Xác định loại khóa học từ slug
 const slugType = ref(route.params.slug || "");
+const notify = useNotificationStore()
 
 // Khi user chọn bài
 const handleSelectLesson = (lesson, index) => {
   if (courseStore.isLessonLocked(index, slugType.value)) {
-    alert("🔒 Bạn cần đăng nhập và mua khóa học để xem bài này!");
+    notify.show('🔒 Bạn cần đăng nhập và mua khóa học để xem bài này!', 'error');
     return;
   }
   selectedLesson.value = lesson;

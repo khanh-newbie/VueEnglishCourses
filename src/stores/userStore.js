@@ -1,10 +1,13 @@
 // src/stores/userStore.js
 import { defineStore } from 'pinia'
 import { ref, watch } from 'vue'
+import { useNotificationStore } from './notificationStore.js'
 
 export const useUserStore = defineStore('user', () => {
   const user = ref(JSON.parse(localStorage.getItem('currentUser') || 'null'))
   const users = ref(JSON.parse(localStorage.getItem('users') || '[]'))
+
+  const notify = useNotificationStore()
 
   // --- Tự động lưu local ---
   watch(user, (val) => {
@@ -19,8 +22,10 @@ export const useUserStore = defineStore('user', () => {
   // --- Hành động ---
   const signup = (name, email, password) => {
     const exists = users.value.some(u => u.email === email)
-    if (exists) return false
-
+    if (exists) {
+      notify.show('Email này đã được đăng ký!', 'error')
+      return false
+    }
     const newUser = {
       id: Date.now(),
       name,
@@ -31,27 +36,42 @@ export const useUserStore = defineStore('user', () => {
     }
     users.value.push(newUser)
     user.value = newUser
+
+    notify.show('🎉 Đăng ký thành công!', 'success')
     return true
   }
 
   const login = (email, password) => {
     const found = users.value.find(u => u.email === email && u.password === password)
-    if (!found) return false
-    user.value = found
+    if (!found) 
+    {
+      notify.show('Sai email hoặc mật khẩu!', 'error')
+      return false
+    }
+      user.value = found
+      notify.show(`Xin chào ${found.name}! 👋`, 'success')
     return true
   }
 
   const logout = () => {
     user.value = null
+    notify.show('Bạn đã đăng xuất thành công 👋', 'info')
   }
 
   // ✅ Thêm: khi mua khoá học
   const purchaseCourse = (courseSlug) => {
-    if (!user.value) return
+    if (!user.value) {
+      notify.show('Vui lòng đăng nhập để mua khoá học!', 'error')
+      return
+    }
+
     if (!user.value.purchasedCourses) user.value.purchasedCourses = []
 
     if (!user.value.purchasedCourses.includes(courseSlug)) {
       user.value.purchasedCourses.push(courseSlug)
+      notify.show('🎉 Mua khoá học thành công!', 'success')
+    } else {
+      notify.show('Bạn đã sở hữu khoá học này rồi!', 'info')
     }
 
     // đồng bộ với danh sách users

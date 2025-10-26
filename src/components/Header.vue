@@ -42,10 +42,11 @@
               <router-link class="nav-link" to="/contact">Liên hệ</router-link>
             </li>
 
-             <!-- Lịch sử giao dịch -->
+            <!-- Lịch sử giao dịch -->
             <li class="nav-item">
               <router-link class="nav-link" to="/orders">Lịch sử giao dịch</router-link>
             </li>
+
           </ul>
         </div>
 
@@ -119,6 +120,17 @@
                     <strong>{{ userStore.user.name }}</strong><br />
                     <small class="text-muted">{{ userStore.user.email }}</small>
                   </li>
+
+                  <li>
+                    <router-link
+                      to="/profile"
+                      class="dropdown-item"
+                      @click="showUserDropdown = false"
+                    >
+                      Thông tin cá nhân
+                    </router-link>
+                  </li>
+
                   <li><button class="dropdown-item" @click="logout">Đăng xuất</button></li>
                 </template>
 
@@ -163,6 +175,7 @@ import { useCartStore } from '../stores/cartStore.js'
 import { useUserStore } from '../stores/userStore.js'
 import LoginModal from './LoginModal.vue'
 import SignupModal from './SignupModal.vue'
+import { useNotificationStore } from '../stores/notificationStore.js'
 
 export default {
   name: 'Header',
@@ -218,7 +231,11 @@ export default {
     const showUserDropdown = ref(false)
 
     const toggleUserDropdown = () => showUserDropdown.value = !showUserDropdown.value
-    const logout = () => userStore.logout()
+    const notify = useNotificationStore()
+    const logout = () => {
+      userStore.logout()
+      notify.show('Đăng xuất thành công!', 'success')
+    }    
 
     return {
       courses, showCart, showCourseDropdown, checkoutOpen, toast,

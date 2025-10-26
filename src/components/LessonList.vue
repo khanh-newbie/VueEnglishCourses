@@ -23,8 +23,15 @@
           {{ lesson.title }}
         </span>
 
-        <!-- Icon khóa nếu bài bị khóa -->
-        <i v-if="isLocked(index)" class="bi bi-lock-fill text-secondary"></i>
+        <!-- Icon khoá hoặc mở khoá -->
+        <i
+          v-if="isLocked(index)"
+          class="bi bi-lock-fill text-secondary fs-5"
+        ></i>
+        <i
+          v-else
+          class="bi bi-unlock-fill text-success fs-5"
+        ></i>
       </button>
     </div>
   </div>
@@ -35,6 +42,7 @@ import { ref, computed } from "vue";
 import { useOrderStore } from "../stores/orderStore";
 import { useUserStore } from "../stores/userStore";
 import { useCourseStore } from "../stores/courseStore.js";
+import { useNotificationStore } from "../stores/notificationStore.js";
 
 const props = defineProps({
   lessons: Array,
@@ -62,9 +70,11 @@ const isLocked = (index) => {
   return courseStore.isLessonLocked(index, props.courseId);
 };
 
+const notify = useNotificationStore()
+
 const handleClick = (lesson, index) => {
   if (isLocked(index)) {
-    alert("🔒 Bạn cần đăng nhập và mua khóa học để xem bài này!");
+    notify.show('🔒 Bạn cần đăng nhập và mua khóa học để xem bài này!', 'error');
     return;
   }
   emits("selectLesson", lesson);

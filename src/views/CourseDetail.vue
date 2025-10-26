@@ -138,6 +138,7 @@ import lessons from '../data/lesson.json'
 import { useCartStore } from '../stores/cartStore.js'
 import { useOrderStore } from '../stores/orderStore.js'
 import { useUserStore } from '../stores/userStore.js'
+import { useNotificationStore } from '../stores/notificationStore.js'
 
 export default {
   name: "CourseDetail",
@@ -182,9 +183,10 @@ export default {
     buyCourse() {
       const orderStore = useOrderStore()
       const userStore = useUserStore()
+      const notify = useNotificationStore()
 
       if (!userStore.user) {
-        alert('⚠️ Bạn cần đăng nhập trước khi mua khóa học!')
+        notify.show('⚠️ Bạn cần đăng nhập trước khi mua khóa học!', 'error')
         return
       }
 
@@ -201,7 +203,7 @@ export default {
         userStore.purchaseCourse(this.course.slug)
       }
 
-      alert('✅ Mua khóa học thành công! Giờ bạn có thể học toàn bộ bài.')
+      notify.show('✅ Mua khóa học thành công! Giờ bạn có thể học toàn bộ bài.', 'success')
     }
   }
 }

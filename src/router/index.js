@@ -5,6 +5,7 @@ import CourseDetail from '../views/CourseDetail.vue'
 import Contact from '../views/Contact.vue'
 import LectureDetail from '../views/LectureDetail.vue'
 import OrderHistory from '../views/OrderHistory.vue'
+import Profile from '../views/Profile.vue'
 
 const routes = [
   { path: '/', name: 'Home', component: Index },
@@ -27,6 +28,10 @@ const routes = [
     name: 'OrderHistory', 
     component: OrderHistory,
     props: true
+  },
+  { path: '/profile', 
+    component: Profile,
+    props: true 
   },
 
 ]

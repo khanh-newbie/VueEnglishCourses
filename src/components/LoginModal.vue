@@ -11,13 +11,18 @@
         <div class="mb-3">
           <label>Email</label>
           <input v-model="email" type="email" class="form-control" required />
+          <small v-if="errors.email" class="text-danger">{{ errors.email }}</small>
         </div>
 
         <!-- Nhập mật khẩu -->
         <div class="mb-3">
           <label>Mật khẩu</label>
           <input v-model="password" type="password" class="form-control" required />
+           <small v-if="errors.password" class="text-danger">{{ errors.password }}</small>
         </div>
+
+        <!-- Thông báo lỗi chung (sai email hoặc mật khẩu) -->
+        <p v-if="errors.general" class="text-danger text-center">{{ errors.general }}</p>
 
         <!-- Nút đăng nhập -->
         <button class="btn btn-primary w-100">Đăng nhập</button>
@@ -54,6 +59,8 @@
 import { ref } from 'vue'
 import { useUserStore } from '../stores/userStore.js'
 
+import { useNotificationStore } from '../stores/notificationStore.js'
+
 /* 🧩 Nhận props từ cha (App hoặc component quản lý modal):
    - open: Boolean → xác định có hiển thị modal không.
 */
@@ -69,8 +76,29 @@ const emit = defineEmits(['close', 'open-signup'])
 const email = ref('')
 const password = ref('')
 
+const errors = ref({})
+const notify = useNotificationStore()
+
 /* 💾 Lấy store quản lý người dùng (đăng nhập / đăng ký / đăng xuất) */
 const userStore = useUserStore()
+
+/* ✅ Hàm kiểm tra hợp lệ trước khi gửi */
+const validateForm = () => {
+  const e = {}
+
+  if (!email.value.trim()) {
+    e.email = 'Vui lòng nhập email.'
+  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {
+    e.email = 'Email không hợp lệ.'
+  }
+
+  if (!password.value.trim()) {
+    e.password = 'Vui lòng nhập mật khẩu.'
+  }
+
+  errors.value = e
+  return Object.keys(e).length === 0
+}
 
 /*
   🚀 Hàm xử lý đăng nhập
@@ -79,14 +107,18 @@ const userStore = useUserStore()
   - Nếu thất bại: báo lỗi.
 */
 const handleLogin = () => {
+  if (!validateForm()) return
+
   const success = userStore.login(email.value, password.value)
   if (success) {
-    alert('Đăng nhập thành công!')
+    notify.show('🎉 Đăng nhập thành công!', 'success')
     email.value = ''
     password.value = ''
-    emit('close') // ✅ Đóng modal sau khi đăng nhập
+    errors.value = {}
+    emit('close')
   } else {
-    alert('Sai email hoặc mật khẩu!')
+    // Hiển thị lỗi chung (ví dụ: sai email hoặc mật khẩu)
+    notify.show('❌ Sai email hoặc mật khẩu!', 'error')
   }
 }
 </script>

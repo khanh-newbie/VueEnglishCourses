@@ -9,12 +9,12 @@
     <h5 class="mb-4">{{ lesson.title }}</h5>
 
     <!-- 🎥 Phần Video bài học -->
-    <div class="ratio ratio-16x9 mb-4">
+    <div class="video-wrapper mb-4">
       <iframe
         :src="lesson.video"
-        width="560"
-        height="315"
+        title="Lesson Video"
         frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen
       ></iframe>
     </div>
@@ -308,4 +308,42 @@ function submitWriting() {
   padding: 12px;
   resize: vertical;
 }
+
+/* 🎥 VIDEO STYLING */
+.video-wrapper {
+  position: relative;
+  padding-top: 56.25%; /* 16:9 ratio */
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: #000;
+}
+
+.video-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 16px;
+}
+
+/* Hiệu ứng khi hover video */
+.video-wrapper:hover {
+  transform: scale(1.02);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+}
+
+/* Nếu muốn thêm border sáng nhẹ */
+.video-wrapper::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  pointer-events: none;
+}
+
 </style>
