@@ -18,14 +18,14 @@
 
             <!-- Trang chủ -->
             <li class="nav-item">
-              <router-link class="nav-link" to="/">Trang chủ</router-link>
+              <router-link class="nav-link" to="/">{{ $t('home') }}</router-link>
             </li>
 
             <!-- Dropdown khóa học (hiện khi hover) -->
             <li class="nav-item dropdown" style="position: relative;"
                 @mouseenter="showCourseDropdown = true"
                 @mouseleave="showCourseDropdown = false">
-              <router-link class="nav-link" to="/courses">Khóa học</router-link>
+              <router-link class="nav-link" to="/courses">{{ $t('courses') }}</router-link>
 
               <!-- Hiệu ứng mượt cho dropdown -->
               <transition name="fade-slide">
@@ -39,12 +39,12 @@
 
             <!-- Liên hệ -->
             <li class="nav-item">
-              <router-link class="nav-link" to="/contact">Liên hệ</router-link>
+              <router-link class="nav-link" to="/contact">{{ $t('contact') }}</router-link>
             </li>
 
             <!-- Lịch sử giao dịch -->
             <li class="nav-item">
-              <router-link class="nav-link" to="/orders">Lịch sử giao dịch</router-link>
+              <router-link class="nav-link" to="/orders">{{ $t('orders') }}</router-link>
             </li>
 
           </ul>
@@ -68,10 +68,10 @@
               class="card shadow border-0"
               style="position: absolute; top: 100%; right: 0; margin-top: 10px; width: 320px; z-index: 1000;">
               <div class="card-body p-2">
-                <h6 class="fw-bold mb-2">Giỏ hàng</h6>
+                <h6 class="fw-bold mb-2">{{ $t('cart') }}</h6>
 
                 <!-- Nếu giỏ trống -->
-                <div v-if="cart.length === 0" class="text-center text-muted">Chưa có khóa học nào</div>
+                <div v-if="cart.length === 0" class="text-center text-muted">{{ $t('cartEmpty') }}</div>
 
                 <!-- Danh sách sản phẩm trong giỏ -->
                 <ul v-else class="list-group mb-2">
@@ -86,14 +86,14 @@
 
                 <!-- Tổng tiền -->
                 <div v-if="cart.length > 0" class="d-flex justify-content-between">
-                  <strong>Tổng:</strong>
+                  <strong>{{ $t('total') }}:</strong>
                   <strong>{{ totalPrice }} ₫</strong>
                 </div>
 
                 <!-- Nút hành động -->
                 <div v-if="cart.length > 0" class="d-flex justify-content-between mt-2">
-                  <button class="btn btn-sm btn-outline-secondary" @click="showCart=false">Tiếp tục mua</button>
-                  <button class="btn btn-sm btn-primary" @click="checkoutOpen=true">Thanh toán</button>
+                  <button class="btn btn-sm btn-outline-secondary" @click="showCart=false">{{ $t('continueShopping') }}</button>
+                  <button class="btn btn-sm btn-primary" @click="checkoutOpen=true">{{ $t('checkout') }}</button>
                 </div>
 
                 <!-- 🧾 Modal thanh toán -->
@@ -103,7 +103,7 @@
           </transition>
 
           <!-- 👤 USER AVATAR + MENU -->
-          <div class="d-inline-block ms-2 position-relative">
+          <div class="d-inline-block ms-2 position-relative mr-5">
             <!-- Avatar người dùng (nếu có) -->
             <div class="avatar-wrapper" @click="toggleUserDropdown">
               <img v-if="userStore.user?.avatar" :src="userStore.user.avatar" alt="User Avatar" class="avatar-img" />
@@ -127,21 +127,29 @@
                       class="dropdown-item"
                       @click="showUserDropdown = false"
                     >
-                      Thông tin cá nhân
+                      {{ $t('profile') }}
                     </router-link>
                   </li>
 
-                  <li><button class="dropdown-item" @click="logout">Đăng xuất</button></li>
+                  <li><button class="dropdown-item" @click="logout">{{ $t('logout') }}</button></li>
                 </template>
 
                 <!-- Nếu chưa đăng nhập -->
                 <template v-else>
-                  <li><button class="dropdown-item" @click="showLogin = true">Đăng nhập</button></li>
-                  <li><button class="dropdown-item" @click="showSignup = true">Đăng ký</button></li>
+                  <li><button class="dropdown-item" @click="showLogin = true">{{ $t('login') }}</button></li>
+                  <li><button class="dropdown-item" @click="showSignup = true">{{ $t('signup') }}</button></li>
                 </template>
               </ul>
             </transition>
           </div>
+
+          <div class="top-0 end-0 mt-0">
+            <button class="btn btn-sm btn-outline-primary" @click="$i18n.locale = $i18n.locale === 'vi' ? 'en' : 'vi'">
+              {{ $i18n.locale === 'vi' ? '🇻🇳' : 'en' }}
+            </button>
+          </div>
+
+
         </div>
       </div>
     </div>

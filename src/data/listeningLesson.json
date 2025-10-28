@@ -1,8 +1,8 @@
 [
   {
     "id": 1,
-    "title": "Lesson 1: Tổng quan kỹ năng Listening",
-    "video": "https://www.youtube.com/embed/i6_jhDYIp1g?si=TgTzPF1a62tpecgA"
+    "title": "Lesson 1: Introduction to Reading",
+    "video": "https://www.youtube.com/embed/abc123"
   },
   {
     "id": 2,
@@ -52,6 +52,26 @@
   {
     "id": 11,
     "title": "Lesson 11: Single Passage – Emails & Notices",
+    "video": "https://www.youtube.com/embed/YOUR_VIDEO_ID_3"
+  },
+  {
+    "id": 12,
+    "title": "Lesson 12: Single Passage – Articles & Advertisements",
+    "video": "https://www.youtube.com/embed/YOUR_VIDEO_ID_3"
+  },
+  {
+    "id": 13,
+    "title": "Lesson 13: Double Passages",
+    "video": "https://www.youtube.com/embed/YOUR_VIDEO_ID_3"
+  },
+  {
+    "id": 14,
+    "title": "Lesson 14: Triple Passages",
+    "video": "https://www.youtube.com/embed/YOUR_VIDEO_ID_3"
+  },
+  {
+    "id": 15,
+    "title": "Lesson 15: Full Reading Test Simulation",
     "video": "https://www.youtube.com/embed/YOUR_VIDEO_ID_3"
   }
 

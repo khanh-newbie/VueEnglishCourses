@@ -8,7 +8,7 @@
   >
     <div class="container py-5">
       <!-- Tiêu đề chính -->
-      <h1 class="fw-bold display-5 mb-3">Liên hệ chúng tôi</h1>
+      <h1 class="fw-bold display-5 mb-3">{{ $t('contactTitle') }}</h1>
 
       <!-- Breadcrumb: Hiển thị đường dẫn điều hướng -->
       <nav aria-label="breadcrumb">
@@ -19,14 +19,14 @@
               to="/"
               class="text-decoration-none text-white-50"
             >
-              Trang chủ
+              {{ $t('home') }}
             </router-link>
           </li>
           <li
             class="breadcrumb-item active text-white"
             aria-current="page"
           >
-            Liên hệ chúng tôi
+            {{ $t('contactTitle') }}
           </li>
         </ol>
       </nav>
@@ -54,22 +54,22 @@
           <div class="col-md-5 mb-4 mb-md-0">
             <!-- Tiêu đề phụ -->
             <h3 class="fw-bold mb-3">
-              Chúng tôi luôn mong muốn <br />được nghe từ bạn!
+              {{ $t('alwaysHeardFromYou') }}
             </h3>
 
             <!-- Email -->
-            <h5 class="fw-semibold">Email</h5>
+            <h5 class="fw-semibold">{{ $t('email') }}</h5>
             <p>
               <a
                 href="mailto:hbdiep04@gmail.com"
                 class="text-decoration-none text-primary"
               >
-                hbdiep04@gmail.com
+                {{ $t('email') }}
               </a>
             </p>
 
             <!-- Điện thoại -->
-            <h5 class="fw-semibold mt-3">Điện thoại</h5>
+            <h5 class="fw-semibold mt-3">{{ $t('phone') }}</h5>
             <p>
               <a
                 href="tel:+0328695050"

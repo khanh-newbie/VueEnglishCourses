@@ -195,7 +195,9 @@ const isRecording = ref(false);
 const audioUrl = ref(null);
 let mediaRecorder;
 let audioChunks = [];
+let audioBlob = null;
 
+// 🎙 Bắt đầu ghi âm
 const startRecording = async () => {
   try {
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
@@ -206,19 +208,22 @@ const startRecording = async () => {
       if (e.data.size > 0) audioChunks.push(e.data);
     };
 
-    mediaRecorder.onstop = () => {
-      const blob = new Blob(audioChunks, { type: "audio/wav" });
-      audioUrl.value = URL.createObjectURL(blob);
+    mediaRecorder.onstop = async () => {
+      const blob = new Blob(audioChunks, { type: "audio/webm" });
+      const wavBlob = await convertToWav(blob);
+      audioBlob = wavBlob;
+      audioUrl.value = URL.createObjectURL(wavBlob);
     };
 
     mediaRecorder.start();
     isRecording.value = true;
   } catch (err) {
-    alert("Không thể truy cập micro!");
+    alert("⚠️ Không thể truy cập micro!");
     console.error(err);
   }
 };
 
+// ⏹ Dừng ghi âm
 const stopRecording = () => {
   if (mediaRecorder && mediaRecorder.state !== "inactive") {
     mediaRecorder.stop();
@@ -226,22 +231,128 @@ const stopRecording = () => {
   isRecording.value = false;
 };
 
+// 🎛 Toggle giữa start và stop
+const toggleRecording = () => {
+  if (isRecording.value) stopRecording();
+  else startRecording();
+};
+
+// 🔊 Chuyển WebM -> WAV
+async function convertToWav(blob) {
+  const arrayBuffer = await blob.arrayBuffer();
+  const audioCtx = new AudioContext();
+  const audioBuffer = await audioCtx.decodeAudioData(arrayBuffer);
+  return bufferToWave(audioBuffer);
+}
+
+// 🧠 Hàm chuyển AudioBuffer -> WAV thật
+function bufferToWave(abuffer) {
+  return new Promise((resolve) => {
+    const numOfChan = abuffer.numberOfChannels;
+    const length = abuffer.length * numOfChan * 2 + 44;
+    const buffer = new ArrayBuffer(length);
+    const view = new DataView(buffer);
+    const channels = [];
+    let sample, offset = 0, pos = 0;
+
+    const writeUTFBytes = (view, offset, string) => {
+      for (let i = 0; i < string.length; i++) {
+        view.setUint8(offset + i, string.charCodeAt(i));
+      }
+    };
+
+    // Header WAV
+    writeUTFBytes(view, pos, "RIFF"); pos += 4;
+    view.setUint32(pos, 36 + abuffer.length * 2, true); pos += 4;
+    writeUTFBytes(view, pos, "WAVE"); pos += 4;
+    writeUTFBytes(view, pos, "fmt "); pos += 4;
+    view.setUint32(pos, 16, true); pos += 4;
+    view.setUint16(pos, 1, true); pos += 2;
+    view.setUint16(pos, numOfChan, true); pos += 2;
+    view.setUint32(pos, abuffer.sampleRate, true); pos += 4;
+    view.setUint32(pos, abuffer.sampleRate * 2 * numOfChan, true); pos += 4;
+    view.setUint16(pos, numOfChan * 2, true); pos += 2;
+    view.setUint16(pos, 16, true); pos += 2;
+    writeUTFBytes(view, pos, "data"); pos += 4;
+    view.setUint32(pos, abuffer.length * 2, true); pos += 4;
+
+    for (let i = 0; i < numOfChan; i++) channels.push(abuffer.getChannelData(i));
+
+    while (pos < length) {
+      for (let i = 0; i < numOfChan; i++) {
+        sample = Math.max(-1, Math.min(1, channels[i][offset]));
+        view.setInt16(pos, sample < 0 ? sample * 0x8000 : sample * 0x7FFF, true);
+        pos += 2;
+      }
+      offset++;
+    }
+
+    resolve(new Blob([buffer], { type: "audio/wav" }));
+  });
+}
+
+// 🚀 Gửi file lên Flask
 const submitRecording = async () => {
-  alert("✅ Đã gửi bản thu âm!");
-  // Sau này có thể upload file audio ở đây
+  if (!audioBlob) {
+    alert("🎧 Chưa có bản ghi âm!");
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append("audio", audioBlob, "record.wav");
+formData.append("reference", props.lesson.prompt);
+
+  try {
+    const res = await fetch("http://127.0.0.1:5000/api/speaking", {
+      method: "POST",
+      body: formData,
+    });
+
+    const data = await res.json();
+    console.log("Kết quả:", data);
+
+    if (data.error) {
+      alert("❌ " + data.error);
+    } else {
+      alert(`📜 Transcript: ${data.transcript}\n✅ ${data.result}\n⭐ Điểm: ${data.score}/10`);
+    }
+  } catch (err) {
+    console.error("Lỗi khi gửi file:", err);
+    alert("🚫 Không thể gửi file đến server!");
+  }
 };
 
 /* ✏️ PHẦN WRITING */
 const writingAnswer = ref("");
 
-function submitWriting() {
+async function submitWriting() {
   if (!writingAnswer.value.trim()) {
     alert("✏️ Please write your answer before submitting!");
     return;
   }
-  alert("✅ Your writing has been submitted!");
-  writingAnswer.value = "";
+
+  const formData = new FormData();
+  formData.append("answer", writingAnswer.value);
+  formData.append("topic", props.lesson.id || "essay1");
+
+  try {
+    const res = await fetch("http://127.0.0.1:5000/api/writing", {
+      method: "POST",
+      body: formData,
+    });
+
+    const data = await res.json();
+    if (data.error) {
+      alert("❌ " + data.error);
+    } else {
+      alert(`📖 ${data.result}\n⭐ Score: ${data.score}/10`);
+    }
+  } catch (err) {
+    console.error("Lỗi gửi bài writing:", err);
+    alert("🚫 Không thể gửi bài viết!");
+  }
 }
+
 </script>
 
 <style scoped>

@@ -3,76 +3,90 @@
     "id": 1,
     "title": "Lesson 1: Tổng quan kỹ năng Writing TOEIC",
     "video": "https://www.youtube.com/embed/6E4mKpqC8Uo?si=janAMkZcSO-z-kWb",
-    "prompt": "Please introduce yourself in English. Talk about your name, where you live, and what you like to do in your free time."
+    "prompt": "Write a short paragraph introducing yourself. Include your name, where you live, what you do, and your goals for learning English."
   },
   {
     "id": 2,
-    "title": "Lesson 2: Tenses and Verb Forms",
+    "title": "Lesson 2: Sentence Structure & Grammar Review",
     "video": "https://www.youtube.com/embed/nPLv2A66qac",
-    "prompt": "Describe your daily routine using different tenses."
+    "prompt": "Describe your daily routine using correct tenses and connectors."
   },
   {
     "id": 3,
-    "title": "Lesson 3: Understanding Context",
-    "video": "https://www.youtube.com/embed/YOUR_VIDEO_ID_3"
+    "title": "Lesson 3: Vocabulary for Business Contexts",
+    "video": "https://www.youtube.com/embed/YOUR_VIDEO_ID_3",
+    "prompt": "Write 5 sentences using business-related vocabulary such as meeting, deadline, colleague, report, and customer."
   },
   {
     "id": 4,
-    "title": "Lesson 4: Adjectives and Adverbs",
-    "video": "https://www.youtube.com/embed/YOUR_VIDEO_ID_3"
+    "title": "Lesson 4: Describing Pictures in Sentences",
+    "video": "https://www.youtube.com/embed/YOUR_VIDEO_ID_4",
+    "prompt": "Look at a picture of an office scene and write 5 sentences describing what people are doing."
   },
   {
     "id": 5,
-    "title": "Lesson 5: Prepositions and Conjunctions",
-    "video": "https://www.youtube.com/embed/YOUR_VIDEO_ID_3"
+    "title": "Lesson 5: Using Adjectives and Prepositions",
+    "video": "https://www.youtube.com/embed/YOUR_VIDEO_ID_5",
+    "prompt": "Write 5 sentences describing your workplace or study place using adjectives and prepositions (e.g. next to, behind, in front of)."
   },
   {
     "id": 6,
-    "title": "Lesson 6: Pronouns and Parallel Structure",
-    "video": "https://www.youtube.com/embed/YOUR_VIDEO_ID_3"
+    "title": "Lesson 6: Writing Clear and Complete Sentences",
+    "video": "https://www.youtube.com/embed/YOUR_VIDEO_ID_6",
+    "prompt": "Rewrite the following sentences to make them clear and grammatically correct."
   },
   {
     "id": 7,
-    "title": "Lesson 7: Connecting Ideas in Paragraphs",
-    "video": "https://www.youtube.com/embed/YOUR_VIDEO_ID_3"
+    "title": "Lesson 7: Understanding Email Prompts",
+    "video": "https://www.youtube.com/embed/YOUR_VIDEO_ID_7",
+    "prompt": "Read an email asking for information about your company and write a short reply providing the requested details."
   },
   {
     "id": 8,
-    "title": "Lesson 8: Vocabulary in Context",
-    "video": "https://www.youtube.com/embed/YOUR_VIDEO_ID_3"
+    "title": "Lesson 8: Writing a Clear and Polite Response",
+    "video": "https://www.youtube.com/embed/YOUR_VIDEO_ID_8",
+    "prompt": "Write an email response to a complaint from a customer. Be polite and professional."
   },
   {
     "id": 9,
-    "title": "Lesson 9: Grammar Review in Paragraphs",
-    "video": "https://www.youtube.com/embed/YOUR_VIDEO_ID_3"
+    "title": "Lesson 9: Common Business Expressions",
+    "video": "https://www.youtube.com/embed/YOUR_VIDEO_ID_9",
+    "prompt": "Write 5 sentences using common business expressions such as 'follow up', 'in charge of', 'as soon as possible', 'on behalf of', 'due to'."
   },
   {
     "id": 10,
-    "title": "Lesson 10: Practice Full Text Completion",
-    "video": "https://www.youtube.com/embed/YOUR_VIDEO_ID_3"
+    "title": "Lesson 10: Structuring an Opinion Essay",
+    "video": "https://www.youtube.com/embed/YOUR_VIDEO_ID_10",
+    "prompt": "Write a short essay expressing your opinion: 'Do you think working from home is better than working in the office?'"
   },
   {
     "id": 11,
-    "title": "Lesson 11: Single Passage – Emails & Notices",
-    "video": "https://www.youtube.com/embed/YOUR_VIDEO_ID_3"
+    "title": "Lesson 11: Giving Reasons and Examples",
+    "video": "https://www.youtube.com/embed/YOUR_VIDEO_ID_11",
+    "prompt": "Write 2 paragraphs giving your opinion about the importance of English in business. Provide clear reasons and examples."
   },
   {
     "id": 12,
-    "title": "Lesson 12: Tổng quan kỹ năng Speaking TOEIC",
+    "title": "Lesson 12: Linking Words and Cohesion",
     "video": "https://www.youtube.com/embed/ZphkR2XsjM4?si=OVtGeaTcWVM9Qfcs",
-    "prompt": "Please introduce yourself in English. Talk about your name, where you live, and what you like to do in your free time."
+    "prompt": "Write a short essay using at least 5 linking words such as 'however', 'therefore', 'in addition', 'as a result', 'on the other hand'."
   },
   {
     "id": 13,
-    "title": "Lesson 13: Tổng quan kỹ năng Speaking TOEIC",
-    "video": "https://www.youtube.com/embed/ZphkR2XsjM4?si=OVtGeaTcWVM9Qfcs",
-    "prompt": "Please introduce yourself in English. Talk about your name, where you live, and what you like to do in your free time."
+    "title": "Lesson 13: Common Mistakes in TOEIC Writing",
+    "video": "https://www.youtube.com/embed/YOUR_VIDEO_ID_13",
+    "prompt": "Rewrite the incorrect sentences below to make them grammatically correct and natural."
   },
   {
     "id": 14,
-    "title": "Lesson 14: Tổng quan kỹ năng Speaking TOEIC",
-    "video": "https://www.youtube.com/embed/ZphkR2XsjM4?si=OVtGeaTcWVM9Qfcs",
-    "prompt": "Please introduce yourself in English. Talk about your name, where you live, and what you like to do in your free time."
+    "title": "Lesson 14: Writing Mock Test",
+    "video": "https://www.youtube.com/embed/YOUR_VIDEO_ID_14",
+    "prompt": "Complete a full writing test including an email response and an opinion essay."
+  },
+  {
+    "id": 15,
+    "title": "Lesson 15: Review and Improvement Plan",
+    "video": "https://www.youtube.com/embed/YOUR_VIDEO_ID_15",
+    "prompt": "Write a short reflection on your writing progress. What are your strengths and what do you plan to improve?"
   }
-
 ]
