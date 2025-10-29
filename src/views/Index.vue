@@ -13,18 +13,18 @@
         >
           <!-- Tiêu đề chính -->
           <h1 class="fw-bold display-4 mb-3 hero-title">
-            Học TOEIC<br />cùng chuyên gia
+            {{ $t('HocToeic') }}<br />{{ $t('CungChuyenGia') }}
           </h1>
 
           <!-- Tên giảng viên -->
-          <h3 class="fw-semibold mb-4 hero-subtitle">Hoàng Bích Diệp</h3>
+          <h3 class="fw-semibold mb-4 hero-subtitle">{{ $t('HoangBichDiep') }}</h3>
 
           <!-- Nút điều hướng đến trang khóa học -->
           <router-link
             to="/courses"
             class="btn btn-cta fw-semibold px-5 py-3 rounded-pill shadow-lg"
           >
-            Xem các khoá học đang mở
+            {{ $t('ViewOpenCourses') }}
             <i class="fa-solid fa-arrow-right ms-2"></i>
           </router-link>
         </div>

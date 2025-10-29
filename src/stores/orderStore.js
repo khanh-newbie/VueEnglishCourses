@@ -19,7 +19,7 @@ export const useOrderStore = defineStore('orderStore', {
     },
 
     addOrder(order) {
-      if (this.orders.find(o => o.id === order.id)) return;
+      if (this.orders.some(o => o.id === order.id)) return;
       this.orders.push(order)
 
       // Lưu danh sách ID đã mua

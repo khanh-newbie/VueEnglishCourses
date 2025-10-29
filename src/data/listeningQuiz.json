@@ -1,16 +1,16 @@
 {
   "1": [
     {
-      "question": "What is the main skill in this section?",
+      "question": "What does the Reading section mainly test in TOEIC?",
       "options": [
-        { "label": "A", "text": "Speaking" },
-        { "label": "B", "text": "Reading" },
-        { "label": "C", "text": "Listening" }
+        { "label": "A", "text": "Speaking skills" },
+        { "label": "B", "text": "Reading comprehension" },
+        { "label": "C", "text": "Listening ability" }
       ],
-      "correct": "C"
+      "correct": "B"
     },
     {
-      "question": "How many parts are in the Leading test?",
+      "question": "How many parts are in the TOEIC Reading test?",
       "options": [
         { "label": "A", "text": "Two" },
         { "label": "B", "text": "Three" },
@@ -19,13 +19,419 @@
       "correct": "B"
     },
     {
-      "question": "What type of questions are included?",
+      "question": "Which part involves reading multiple passages?",
       "options": [
-        { "label": "A", "text": "Multiple choice" },
-        { "label": "B", "text": "True/False" },
-        { "label": "C", "text": "Matching" }
+        { "label": "A", "text": "Part 5" },
+        { "label": "B", "text": "Part 6" },
+        { "label": "C", "text": "Part 7" }
       ],
-       "correct": "A"
+      "correct": "C"
+    }
+  ],
+  "2": [
+    {
+      "question": "Which tense describes an action happening right now?",
+      "options": [
+        { "label": "A", "text": "Present Continuous" },
+        { "label": "B", "text": "Past Simple" },
+        { "label": "C", "text": "Future Perfect" }
+      ],
+      "correct": "A"
+    },
+    {
+      "question": "Which sentence uses the correct verb form?",
+      "options": [
+        { "label": "A", "text": "He going to work every day." },
+        { "label": "B", "text": "He goes to work every day." },
+        { "label": "C", "text": "He go to work every day." }
+      ],
+      "correct": "B"
+    },
+    {
+      "question": "Which tense is often used for past habits?",
+      "options": [
+        { "label": "A", "text": "Used to" },
+        { "label": "B", "text": "Present Simple" },
+        { "label": "C", "text": "Future Simple" }
+      ],
+      "correct": "A"
+    }
+  ],
+  "3": [
+    {
+      "question": "Which word is an adjective?",
+      "options": [
+        { "label": "A", "text": "Quickly" },
+        { "label": "B", "text": "Beautiful" },
+        { "label": "C", "text": "Carefully" }
+      ],
+      "correct": "B"
+    },
+    {
+      "question": "Which adverb best completes the sentence: 'She speaks ____'? ",
+      "options": [
+        { "label": "A", "text": "Fluent" },
+        { "label": "B", "text": "Fluently" },
+        { "label": "C", "text": "Fluency" }
+      ],
+      "correct": "B"
+    },
+    {
+      "question": "Where do adjectives usually appear in English sentences?",
+      "options": [
+        { "label": "A", "text": "After the noun" },
+        { "label": "B", "text": "Before the noun" },
+        { "label": "C", "text": "At the end of the sentence" }
+      ],
+      "correct": "B"
+    }
+  ],
+  "4": [
+    {
+      "question": "Which is the correct use of an adverb?",
+      "options": [
+        { "label": "A", "text": "He runs fastly." },
+        { "label": "B", "text": "He runs fast." },
+        { "label": "C", "text": "He fast runs." }
+      ],
+      "correct": "B"
+    },
+    {
+      "question": "Which adjective best fits: 'She is a ____ student'?",
+      "options": [
+        { "label": "A", "text": "Intelligently" },
+        { "label": "B", "text": "Intelligent" },
+        { "label": "C", "text": "Intelligence" }
+      ],
+      "correct": "B"
+    },
+    {
+      "question": "What is the function of adverbs?",
+      "options": [
+        { "label": "A", "text": "Describe nouns" },
+        { "label": "B", "text": "Describe verbs or adjectives" },
+        { "label": "C", "text": "Connect ideas" }
+      ],
+      "correct": "B"
+    }
+  ],
+  "5": [
+    {
+      "question": "Which preposition fits: 'She is interested ___ music'?",
+      "options": [
+        { "label": "A", "text": "on" },
+        { "label": "B", "text": "in" },
+        { "label": "C", "text": "at" }
+      ],
+      "correct": "B"
+    },
+    {
+      "question": "Which conjunction is used to show contrast?",
+      "options": [
+        { "label": "A", "text": "Because" },
+        { "label": "B", "text": "Although" },
+        { "label": "C", "text": "And" }
+      ],
+      "correct": "B"
+    },
+    {
+      "question": "Which sentence uses a preposition correctly?",
+      "options": [
+        { "label": "A", "text": "I depend of you." },
+        { "label": "B", "text": "I depend on you." },
+        { "label": "C", "text": "I depend to you." }
+      ],
+      "correct": "B"
+    }
+  ],
+  "6": [
+    {
+      "question": "Which word replaces 'Mary and John' in 'Mary and John went to the park'?",
+      "options": [
+        { "label": "A", "text": "They" },
+        { "label": "B", "text": "Them" },
+        { "label": "C", "text": "Their" }
+      ],
+      "correct": "A"
+    },
+    {
+      "question": "What is the purpose of parallel structure?",
+      "options": [
+        { "label": "A", "text": "To make sentences shorter" },
+        { "label": "B", "text": "To make ideas consistent and clear" },
+        { "label": "C", "text": "To avoid repetition" }
+      ],
+      "correct": "B"
+    },
+    {
+      "question": "Which sentence has correct parallel structure?",
+      "options": [
+        { "label": "A", "text": "He likes reading, to swim, and biking." },
+        { "label": "B", "text": "He likes reading, swimming, and biking." },
+        { "label": "C", "text": "He likes to read, swim, and biking." }
+      ],
+      "correct": "B"
+    }
+  ],
+  "7": [
+    {
+      "question": "What do transition words help with?",
+      "options": [
+        { "label": "A", "text": "Connecting ideas smoothly" },
+        { "label": "B", "text": "Replacing nouns" },
+        { "label": "C", "text": "Forming questions" }
+      ],
+      "correct": "A"
+    },
+    {
+      "question": "Which transition shows contrast?",
+      "options": [
+        { "label": "A", "text": "However" },
+        { "label": "B", "text": "Furthermore" },
+        { "label": "C", "text": "In addition" }
+      ],
+      "correct": "A"
+    },
+    {
+      "question": "Which transition shows cause and effect?",
+      "options": [
+        { "label": "A", "text": "Because" },
+        { "label": "B", "text": "Meanwhile" },
+        { "label": "C", "text": "Before" }
+      ],
+      "correct": "A"
+    }
+  ],
+  "8": [
+    {
+      "question": "What helps you guess the meaning of a new word?",
+      "options": [
+        { "label": "A", "text": "Context clues" },
+        { "label": "B", "text": "Word length" },
+        { "label": "C", "text": "Alphabet order" }
+      ],
+      "correct": "A"
+    },
+    {
+      "question": "Which is a good strategy for unfamiliar vocabulary?",
+      "options": [
+        { "label": "A", "text": "Ignore the word" },
+        { "label": "B", "text": "Read the sentence for clues" },
+        { "label": "C", "text": "Translate every word" }
+      ],
+      "correct": "B"
+    },
+    {
+      "question": "Which context clue type gives an opposite meaning?",
+      "options": [
+        { "label": "A", "text": "Antonym clue" },
+        { "label": "B", "text": "Example clue" },
+        { "label": "C", "text": "Definition clue" }
+      ],
+      "correct": "A"
+    }
+  ],
+  "9": [
+    {
+      "question": "Why is grammar important in reading?",
+      "options": [
+        { "label": "A", "text": "It helps understand sentence structure" },
+        { "label": "B", "text": "It makes the text longer" },
+        { "label": "C", "text": "It replaces vocabulary" }
+      ],
+      "correct": "A"
+    },
+    {
+      "question": "Which sentence is grammatically correct?",
+      "options": [
+        { "label": "A", "text": "She don’t like coffee." },
+        { "label": "B", "text": "She doesn’t like coffee." },
+        { "label": "C", "text": "She not likes coffee." }
+      ],
+      "correct": "B"
+    },
+    {
+      "question": "What is the main focus of grammar review in paragraphs?",
+      "options": [
+        { "label": "A", "text": "Sentence patterns" },
+        { "label": "B", "text": "Word spelling" },
+        { "label": "C", "text": "Punctuation only" }
+      ],
+      "correct": "A"
+    }
+  ],
+  "10": [
+    {
+      "question": "What does Part 6 mainly test?",
+      "options": [
+        { "label": "A", "text": "Listening skills" },
+        { "label": "B", "text": "Text completion ability" },
+        { "label": "C", "text": "Speaking skills" }
+      ],
+      "correct": "B"
+    },
+    {
+      "question": "What should you read first in a text completion question?",
+      "options": [
+        { "label": "A", "text": "The blank sentence only" },
+        { "label": "B", "text": "The whole passage" },
+        { "label": "C", "text": "Only the title" }
+      ],
+      "correct": "B"
+    },
+    {
+      "question": "What type of word is often missing in Part 6?",
+      "options": [
+        { "label": "A", "text": "Conjunctions" },
+        { "label": "B", "text": "Nouns" },
+        { "label": "C", "text": "Verbs or prepositions" }
+      ],
+      "correct": "C"
+    }
+  ],
+  "11": [
+    {
+      "question": "What kind of text is common in Part 7 single passages?",
+      "options": [
+        { "label": "A", "text": "Emails or notices" },
+        { "label": "B", "text": "Dialogues" },
+        { "label": "C", "text": "Charts" }
+      ],
+      "correct": "A"
+    },
+    {
+      "question": "What is a good reading strategy for emails?",
+      "options": [
+        { "label": "A", "text": "Read every word carefully" },
+        { "label": "B", "text": "Find keywords quickly" },
+        { "label": "C", "text": "Skip the first paragraph" }
+      ],
+      "correct": "B"
+    },
+    {
+      "question": "What should you identify first in a notice?",
+      "options": [
+        { "label": "A", "text": "Purpose and key details" },
+        { "label": "B", "text": "All unknown words" },
+        { "label": "C", "text": "Grammatical patterns" }
+      ],
+      "correct": "A"
+    }
+  ],
+  "12": [
+    {
+      "question": "What kind of passage often includes ads and articles?",
+      "options": [
+        { "label": "A", "text": "Single passage" },
+        { "label": "B", "text": "Double passage" },
+        { "label": "C", "text": "Triple passage" }
+      ],
+      "correct": "A"
+    },
+    {
+      "question": "What is an effective strategy for ads?",
+      "options": [
+        { "label": "A", "text": "Focus on prices and offers" },
+        { "label": "B", "text": "Translate every line" },
+        { "label": "C", "text": "Ignore brand names" }
+      ],
+      "correct": "A"
+    },
+    {
+      "question": "What should you do to find the main idea quickly?",
+      "options": [
+        { "label": "A", "text": "Read the first and last sentence" },
+        { "label": "B", "text": "Count the words" },
+        { "label": "C", "text": "Focus on grammar" }
+      ],
+      "correct": "A"
+    }
+  ],
+  "13": [
+    {
+      "question": "What do double passages require you to do?",
+      "options": [
+        { "label": "A", "text": "Compare two related texts" },
+        { "label": "B", "text": "Read only one text" },
+        { "label": "C", "text": "Identify verb tenses" }
+      ],
+      "correct": "A"
+    },
+    {
+      "question": "What should you focus on in double passages?",
+      "options": [
+        { "label": "A", "text": "Shared information" },
+        { "label": "B", "text": "Color of the text" },
+        { "label": "C", "text": "Word count" }
+      ],
+      "correct": "A"
+    },
+    {
+      "question": "Which question type appears often?",
+      "options": [
+        { "label": "A", "text": "Who said this?" },
+        { "label": "B", "text": "What does the author think?" },
+        { "label": "C", "text": "How are the two passages related?" }
+      ],
+      "correct": "C"
+    }
+  ],
+  "14": [
+    {
+      "question": "What is unique about triple passages?",
+      "options": [
+        { "label": "A", "text": "Three texts connected by topic" },
+        { "label": "B", "text": "Three unrelated texts" },
+        { "label": "C", "text": "Three grammar exercises" }
+      ],
+      "correct": "A"
+    },
+    {
+      "question": "What should you read first in triple passages?",
+      "options": [
+        { "label": "A", "text": "All three quickly for context" },
+        { "label": "B", "text": "Only the first passage" },
+        { "label": "C", "text": "Only the questions" }
+      ],
+      "correct": "A"
+    },
+    {
+      "question": "What helps you avoid traps?",
+      "options": [
+        { "label": "A", "text": "Read carefully and compare information" },
+        { "label": "B", "text": "Choose the longest answer" },
+        { "label": "C", "text": "Ignore details" }
+      ],
+      "correct": "A"
+    }
+  ],
+  "15": [
+    {
+      "question": "What is the goal of a full test simulation?",
+      "options": [
+        { "label": "A", "text": "To practice under real conditions" },
+        { "label": "B", "text": "To memorize grammar rules" },
+        { "label": "C", "text": "To skip difficult questions" }
+      ],
+      "correct": "A"
+    },
+    {
+      "question": "How long is the TOEIC Reading section?",
+      "options": [
+        { "label": "A", "text": "45 minutes" },
+        { "label": "B", "text": "75 minutes" },
+        { "label": "C", "text": "90 minutes" }
+      ],
+      "correct": "B"
+    },
+    {
+      "question": "What should you do after finishing the test?",
+      "options": [
+        { "label": "A", "text": "Review mistakes and analyze patterns" },
+        { "label": "B", "text": "Forget about it" },
+        { "label": "C", "text": "Start a new section immediately" }
+      ],
+      "correct": "A"
     }
   ]
 }

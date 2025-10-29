@@ -1,17 +1,17 @@
 <template>
   <div class="container py-5" ref="invoiceRef">
-    <!-- Nút xuất PDF ở góc trên bên phải -->
+    <!-- Nút xuất PDF ở góc trên bên phải
     <button
       class="btn btn-primary position-absolute end-0 mt-0 me-20 no-print"
       @click="exportPDF"
     >
-      🖨️ Xuất hóa đơn PDF
-    </button>
+      🖨️ {{ $t('ExportPDF') }}
+    </button> -->
 
-    <h3 class="mb-4">📜 Lịch sử giao dịch</h3>
+    <h3 class="mb-4">📜 {{ $t('OrderHistory') }}</h3>
 
     <div v-if="userOrders.length === 0" class="text-muted">
-      Chưa có giao dịch nào.
+      {{ $t('NoPay') }}
     </div>
 
     <div v-else>
@@ -22,9 +22,9 @@
       >
         <div class="d-flex justify-content-between align-items-start">
           <div>
-            <div><strong>Mã hóa đơn:</strong> {{ order.id }}</div>
-            <div><strong>Ngày:</strong> {{ new Date(order.createdAt).toLocaleString() }}</div>
-            <div><strong>Phương thức:</strong> {{ order.method || 'Thanh toán trực tiếp' }}</div>
+            <div><strong>{{ $t('InvoiceCode') }}:</strong> {{ order.id }}</div>
+            <div><strong>{{ $t('ExportDayPDF') }}:</strong> {{ new Date(order.createdAt).toLocaleString() }}</div>
+            <div><strong>{{ $t('PaymentMethod') }}:</strong> {{ order.method || 'Thanh toán trực tiếp' }}</div>
           </div>
           <div class="text-end">
             <strong class="text-danger">{{ order.total }} ₫</strong>
@@ -40,7 +40,7 @@
         <!-- Nút xuất Excel cho từng hóa đơn -->
         <div class="mt-3">
           <button class="btn btn-success" @click="exportExcel(order)">
-            📊 Xuất Excel
+            📊 {{ $t('ExportExcel') }}
           </button>
         </div>
       </div>
@@ -53,7 +53,7 @@ import { ref, computed, onMounted } from 'vue'
 import { useOrderStore } from '../stores/orderStore.js'
 import { useUserStore } from '../stores/userStore.js'
 
-import html2pdf from 'html2pdf.js'
+// import html2pdf from 'html2pdf.js'
 import * as XLSX from 'xlsx'
 
 const invoiceRef = ref(null)
@@ -70,24 +70,24 @@ const userOrders = computed(() => {
 })
 
 // ===== PDF: Xuất tất cả hóa đơn =====
-function exportPDF() {
-  if (!invoiceRef.value) return
+// function exportPDF() {
+//   if (!invoiceRef.value) return
 
-  const now = new Date()
-  const pad = (n) => n.toString().padStart(2, '0')
-  const formattedDate = `${now.getFullYear()}-${pad(now.getMonth()+1)}-${pad(now.getDate())}`
+//   const now = new Date()
+//   const pad = (n) => n.toString().padStart(2, '0')
+//   const formattedDate = `${now.getFullYear()}-${pad(now.getMonth()+1)}-${pad(now.getDate())}`
 
-  html2pdf()
-    .set({
-      margin: 10,
-      filename: `HoaDon_${formattedDate}.pdf`,
-      image: { type: 'jpeg', quality: 0.98 },
-      html2canvas: { scale: 2 },
-      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-    })
-    .from(invoiceRef.value)
-    .save()
-}
+//   html2pdf()
+//     .set({
+//       margin: 10,
+//       filename: `HoaDon_${formattedDate}.pdf`,
+//       image: { type: 'jpeg', quality: 0.98 },
+//       html2canvas: { scale: 2 },
+//       jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+//     })
+//     .from(invoiceRef.value)
+//     .save()
+// }
 
 // ===== Excel: Xuất từng hóa đơn riêng =====
 function exportExcel(order) {

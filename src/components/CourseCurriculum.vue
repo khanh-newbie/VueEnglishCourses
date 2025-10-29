@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h4 class="fw-bold mb-3">Chương trình học</h4>
+    <h4 class="fw-bold mb-3">{{ $t('StudyProgram') }}</h4>
 
     <div v-if="filteredLessons.length">
       <div
@@ -21,7 +21,7 @@
               :disabled="isLocked(index)"
               @click="goToLesson(lesson.id, index)"
             >
-              Xem trước
+              {{ $t('Preview') }}
             </button>
             <i
               :class="[
@@ -36,7 +36,7 @@
     </div>
 
     <div v-else>
-      <p class="text-muted">Chưa có bài học cho khóa này.</p>
+      <p class="text-muted">{{ $t('NoLessonForCourse') }}</p>
     </div>
   </div>
 </template>

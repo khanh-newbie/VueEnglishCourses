@@ -7,13 +7,13 @@
     <!-- Hiển thị tiêu đề “Các khóa học” và breadcrumb điều hướng -->
     <section class="slider-section text-white text-center position-relative overflow-hidden py-5 bg-primary">
       <div class="container">
-        <h1 class="fw-bold display-5 mb-3">Các khóa học</h1>
+        <h1 class="fw-bold display-5 mb-3">{{ $t('CoursesTitle') }}</h1>
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb justify-content-center mb-0">
             <li class="breadcrumb-item">
-              <router-link to="/" class="text-decoration-none text-white-50">Trang chủ</router-link>
+              <router-link to="/" class="text-decoration-none text-white-50">{{ $t('home') }}</router-link>
             </li>
-            <li class="breadcrumb-item active text-white" aria-current="page">Khóa học</li>
+            <li class="breadcrumb-item active text-white" aria-current="page">{{ $t('courses') }}</li>
           </ol>
         </nav>
       </div>
@@ -27,7 +27,7 @@
 
         <!-- 🟨 Tiêu đề phụ -->
         <div class="text-center mb-5">
-          <p class="text-muted lead">Chọn khóa học phù hợp với trình độ của bạn</p>
+          <p class="text-muted lead">{{ $t('chooseCourseSubtitle') }}</p>
         </div>
 
         <!-- 🟧 Danh sách khóa học hiển thị theo dạng thẻ (card) -->
@@ -48,7 +48,7 @@
                 <!-- 🟨 Overlay khi hover vào ảnh: hiện nút Chi tiết / Thêm vào giỏ -->
                 <div class="overlay d-flex justify-content-center align-items-center">
                   <router-link :to="`/courses/${course.slug}`" class="btn btn-sm course-btn me-2">
-                    Chi tiết <i class="fa-solid fa-arrow-right ms-1"></i>
+                    {{ $t('detail') }} <i class="fa-solid fa-arrow-right ms-1"></i>
                   </router-link>
 
                   <!-- Nút thêm vào giỏ hàng -->
@@ -63,9 +63,9 @@
 
               <!-- 🟩 Thông tin khóa học: tên, thời lượng, giá -->
               <div class="card-body text-center py-3">
-                <h6 class="card-title fw-bold mb-2 gradient-text">{{ course.name }}</h6>
+                <h6 class="card-title fw-bold mb-2 gradient-text">{{ course.name[$i18n.locale] }}</h6>
                 <p class="text-muted small mb-1">
-                  <i class="fa-solid fa-clock me-1"></i>{{ course.duration }}
+                  <i class="fa-solid fa-clock me-1"></i>{{ course.duration[$i18n.locale] }}
                 </p>
                 <h6 class="text-danger fw-bold mb-0 fs-6">{{ course.price }}</h6>
               </div>

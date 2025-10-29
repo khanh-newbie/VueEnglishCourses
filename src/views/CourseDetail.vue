@@ -13,10 +13,10 @@
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb mb-0">
                 <li class="breadcrumb-item">
-                  <router-link to="/" class="text-white-50 text-decoration-none">Trang chủ</router-link>
+                  <router-link to="/" class="text-white-50 text-decoration-none">{{ $t('home') }}</router-link>
                 </li>
                 <li class="breadcrumb-item">
-                  <router-link to="/courses" class="text-white-50 text-decoration-none">Khóa học</router-link>
+                  <router-link to="/courses" class="text-white-50 text-decoration-none">{{ $t('courses') }}</router-link>
                 </li>
                 <li class="breadcrumb-item active text-white" aria-current="page">{{ course?.name }}</li>
               </ol>
@@ -58,17 +58,17 @@
             <ul class="nav nav-tabs" id="courseTab" role="tablist">
               <li class="nav-item" role="presentation">
                 <button class="nav-link active" id="overview-tab" data-bs-toggle="tab" data-bs-target="#overview" type="button" role="tab">
-                  Tổng quan
+                  {{ $t('overview') }}
                 </button>
               </li>
               <li class="nav-item" role="presentation">
                 <button class="nav-link" id="curriculum-tab" data-bs-toggle="tab" data-bs-target="#curriculum" type="button" role="tab">
-                  Chương trình học
+                  {{ $t('lessons') }}
                 </button>
               </li>
               <li class="nav-item" role="presentation">
                 <button class="nav-link" id="instructor-tab" data-bs-toggle="tab" data-bs-target="#instructor" type="button" role="tab">
-                  Giảng viên
+                  {{ $t('teacher') }}
                 </button>
               </li>
             </ul>
@@ -78,7 +78,7 @@
 
               <!-- Tab: Tổng quan -->
               <div class="tab-pane fade show active" id="overview" role="tabpanel">
-                <h4 class="fw-bold mb-3">Tổng quan khóa học</h4>
+                <h4 class="fw-bold mb-3">{{ $t('CourseOverview') }}</h4>
                 <p>Khóa học Toeic Reading giúp bạn nắm vững kỹ năng đọc hiểu, từ vựng và chiến lược làm bài thi hiệu quả.</p>
               </div>
 
@@ -112,12 +112,11 @@
                 src="https://englishwithhuy.com/wp-content/themes/edublink/assets/images/course-preview.jpg"
                 class="card-img-top" alt="Preview">
               <div class="card-body">
-                <h5 class="fw-bold">Khoá học bao gồm:</h5>
+                <h5 class="fw-bold">{{ $t('CourseIncludes') }}:</h5>
                 <ul class="list-unstyled mb-3">
-                  <li><i class="bi bi-cash-coin me-2 text-success"></i><strong>Giá:</strong> {{ course?.price }}</li>
-                  <li><i class="bi bi-person-fill me-2 text-primary"></i><strong>Giáo viên:</strong> {{ course?.teacher }}</li>
-                  <li><i class="bi bi-journal-text me-2 text-warning"></i><strong>Bài học:</strong> {{ lessonCount }}</li>
-                  <li><i class="bi bi-people-fill me-2 text-info"></i><strong>Học viên:</strong> {{ course?.students }}</li>
+                  <li><i class="bi bi-cash-coin me-2 text-success"></i><strong>{{ $t('Price') }}:</strong> {{ course?.price }}</li>
+                  <li><i class="bi bi-person-fill me-2 text-primary"></i><strong>{{ $t('Teacher') }}:</strong> {{ course?.teacher }}</li>
+                  <li><i class="bi bi-journal-text me-2 text-warning"></i><strong>{{ $t('Lecture') }}:</strong> {{ lessonCount }}</li>
                 </ul>
               </div>
             </div>

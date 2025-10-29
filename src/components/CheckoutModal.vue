@@ -60,12 +60,46 @@
               <input v-model="form.address" class="form-control form-control-sm" />
             </div>
 
+            <!-- 💳 Phương thức thanh toán (động) -->
             <div class="mb-3">
-              <label class="form-label small">Phương thức (giả lập)</label>
-              <select v-model="form.method" class="form-select form-select-sm">
-                <option value="card">Thẻ (giả lập)</option>
-                <option value="bank">Chuyển khoản (giả lập)</option>
-              </select>
+              <label class="form-label small">Phương thức thanh toán</label>
+              <div class="d-flex gap-2 mb-2">
+                <button
+                  type="button"
+                  class="btn btn-outline-primary btn-sm flex-fill"
+                  :class="{ active: form.method === 'card' }"
+                  @click="form.method = 'card'"
+                >
+                  💳 Thẻ
+                </button>
+
+                <button
+                  type="button"
+                  class="btn btn-outline-success btn-sm flex-fill"
+                  :class="{ active: form.method === 'bank' }"
+                  @click="form.method = 'bank'"
+                >
+                  🏦 Chuyển khoản
+                </button>
+              </div>
+
+              <!-- ⚡ Hiển thị chi tiết động -->
+              <transition name="fade" mode="out-in">
+                <div v-if="form.method === 'card'" key="card" class="p-2 border rounded bg-light small">
+                  💳 <strong>Thanh toán bằng thẻ (giả lập)</strong><br />
+                  Mã thẻ: **** **** **** 1234<br />
+                  Hết hạn: 12/26<br />
+                  Chủ thẻ: {{ form.name || "Nguyễn Văn A" }}
+                </div>
+
+                <div v-else-if="form.method === 'bank'" key="bank" class="p-2 border rounded bg-light small">
+                  🏦 <strong>Chuyển khoản ngân hàng (giả lập)</strong><br />
+                  Ngân hàng: ACB - CN Hà Nội<br />
+                  STK: 123456789<br />
+                  Tên: CÔNG TY HỌC TOEIC<br />
+                  Nội dung: {{ form.name || "Nguyễn Văn A" }} - Thanh toán khóa học
+                </div>
+              </transition>
             </div>
 
             <!-- Nút hủy và thanh toán -->
