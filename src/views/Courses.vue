@@ -63,9 +63,9 @@
 
               <!-- 🟩 Thông tin khóa học: tên, thời lượng, giá -->
               <div class="card-body text-center py-3">
-                <h6 class="card-title fw-bold mb-2 gradient-text">{{ course.name[$i18n.locale] }}</h6>
+                <h6 class="card-title fw-bold mb-2 gradient-text">{{ course.name }}</h6>
                 <p class="text-muted small mb-1">
-                  <i class="fa-solid fa-clock me-1"></i>{{ course.duration[$i18n.locale] }}
+                  <i class="fa-solid fa-clock me-1"></i>{{ course.duration }}
                 </p>
                 <h6 class="text-danger fw-bold mb-0 fs-6">{{ course.price }}</h6>
               </div>

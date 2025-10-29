@@ -23,7 +23,7 @@
         <div class="d-flex justify-content-between align-items-start">
           <div>
             <div><strong>{{ $t('InvoiceCode') }}:</strong> {{ order.id }}</div>
-            <div><strong>{{ $t('ExportDayPDF') }}:</strong> {{ new Date(order.createdAt).toLocaleString() }}</div>
+            <div><strong>{{ $t('ExportExcel') }}:</strong> {{ new Date(order.createdAt).toLocaleString() }}</div>
             <div><strong>{{ $t('PaymentMethod') }}:</strong> {{ order.method || 'Thanh toán trực tiếp' }}</div>
           </div>
           <div class="text-end">

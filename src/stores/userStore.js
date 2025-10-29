@@ -89,6 +89,35 @@ export const useUserStore = defineStore('user', () => {
     return user.value?.purchasedCourses?.includes(courseSlug)
   }
 
+  // ✅ Đổi mật khẩu
+  const changePassword = (oldPass, newPass) => {
+    if (!user.value) {
+      notify.show('Bạn chưa đăng nhập!', 'error')
+      return false
+    }
 
-  return { user, users, signup, login, logout, purchaseCourse, hasPurchased }
+    // Kiểm tra mật khẩu cũ
+    if (user.value.password !== oldPass) {
+      notify.show('Mật khẩu hiện tại không đúng!', 'error')
+      return false
+    }
+
+    // Cập nhật mật khẩu mới
+    user.value.password = newPass
+
+    // Đồng bộ với danh sách users
+    const index = users.value.findIndex(u => u.id === user.value.id)
+    if (index !== -1) {
+      users.value[index].password = newPass
+    }
+
+    // Cập nhật localStorage
+    localStorage.setItem('users', JSON.stringify(users.value))
+    localStorage.setItem('currentUser', JSON.stringify(user.value))
+
+    notify.show('🔒 Đổi mật khẩu thành công!', 'success')
+    return true
+  }
+
+  return { user, users, signup, login, logout, purchaseCourse, hasPurchased, changePassword}
 })
