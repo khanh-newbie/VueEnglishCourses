@@ -50,16 +50,6 @@
               <input v-model="form.name" class="form-control form-control-sm" required />
             </div>
 
-            <div class="mb-2">
-              <label class="form-label small">Email</label>
-              <input v-model="form.email" type="email" class="form-control form-control-sm" required />
-            </div>
-
-            <div class="mb-2">
-              <label class="form-label small">Địa chỉ</label>
-              <input v-model="form.address" class="form-control form-control-sm" />
-            </div>
-
             <!-- 💳 Phương thức thanh toán (động) -->
             <div class="mb-3">
               <label class="form-label small">Phương thức thanh toán</label>
@@ -89,15 +79,15 @@
                   💳 <strong>Thanh toán bằng thẻ (giả lập)</strong><br />
                   Mã thẻ: **** **** **** 1234<br />
                   Hết hạn: 12/26<br />
-                  Chủ thẻ: {{ form.name || "Nguyễn Văn A" }}
+                  Chủ thẻ: {{ form.name || "Hoàng Bích Diệp" }}
                 </div>
 
                 <div v-else-if="form.method === 'bank'" key="bank" class="p-2 border rounded bg-light small">
                   🏦 <strong>Chuyển khoản ngân hàng (giả lập)</strong><br />
                   Ngân hàng: ACB - CN Hà Nội<br />
                   STK: 123456789<br />
-                  Tên: CÔNG TY HỌC TOEIC<br />
-                  Nội dung: {{ form.name || "Nguyễn Văn A" }} - Thanh toán khóa học
+                  Tên: Hoàng Bích Diệp<br />
+                  Nội dung: {{ form.name || "Nguyễn Duy Khánh" }} - Thanh toán khóa học
                 </div>
               </transition>
             </div>
@@ -163,7 +153,7 @@ export default {
     const cartStore = useCartStore()
 
     // Dữ liệu form người mua
-    const form = ref({ name: '', email: '', address: '', method: 'card' })
+    const form = ref({ name: '', email: '', method: 'card' })
 
     // Trạng thái xử lý & kết quả
     const processing = ref(false)

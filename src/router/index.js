@@ -10,7 +10,7 @@ import Profile from '../views/Profile.vue'
 const routes = [
   { path: '/', name: 'Home', component: Index },
   { path: '/courses', name: 'Courses', component: Course },
-  // { path: '/courseDetail', name: 'CourseDetail', component: CourseDetail},
+
   {
     path: '/courses/:slug',
     name: 'CourseDetail',
